@@ -20,13 +20,14 @@ public class DirectionalLight implements Light{
 	private Color colors; 
 	
 	/**
-	 * return the coordinates
+	 * @return the coordinates
 	 */
 	public Point getCoordinates() {
 		return this.coordinates;
 	}
 
 	/**
+	 * @param coordinates
 	 * set the coordinates
 	 */
 	public void setCoordinates(Point coordinates) {
@@ -34,7 +35,7 @@ public class DirectionalLight implements Light{
 	}
 
 	/**
-	 * return the colors
+	 * @return the colors
 	 */
 	public Color getColors() {
 		return this.colors;
@@ -42,6 +43,7 @@ public class DirectionalLight implements Light{
 
 	/**
 	 * set the colors
+	 * @param colors
 	 */
 	public void setColors(Color colors) {
 		this.colors=colors;
