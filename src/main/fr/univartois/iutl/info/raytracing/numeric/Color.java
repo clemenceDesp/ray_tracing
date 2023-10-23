@@ -11,7 +11,7 @@ public class Color {
 	 * @param triplets
 	 */
 	public Color(Triplets triplets) {
-		if (triplets.getPointA().getX()<=1 && triplets.getPointA().getY()<=1 && triplets.getPointA().getZ()<=1) {
+		if (triplets.getPointA().getX()<=1 && triplets.getPointA().getY()<=1 && triplets.getPointA().getZ()<=1 && triplets.getPointA().getX()>=0 && triplets.getPointA().getY()>=0 && triplets.getPointA().getZ()>=0) {
 			this.triplets = triplets;
 		}
 	}
@@ -37,7 +37,7 @@ public class Color {
 	 */
 	public Color addition(Color pointB) {
 		Color c = new Color(triplets.addition(pointB.getTriplets().getPointA()));
-		if (c.getTriplets().getPointA().getX()<=1 && c.getTriplets().getPointA().getY()<=1 && c.getTriplets().getPointA().getZ()<=1) {
+		if (c.getTriplets().getPointA().getX()<=1 && c.getTriplets().getPointA().getY()<=1 && c.getTriplets().getPointA().getZ()<=1 && c.getTriplets().getPointA().getX()>=0 && c.getTriplets().getPointA().getY()>=0 && c.getTriplets().getPointA().getZ()>=0) {
 			return c;
 		}
 		System.err.println("une des trois coordonnées de la couleur dépasse 1"); 
