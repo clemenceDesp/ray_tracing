@@ -6,8 +6,8 @@ import java.util.List;
 public class ConcreteSceneBuilder implements SceneBuilder {
     private int height;
     private int width;
-    private List<Light> light;
-    private List<Figure> figures;
+    private final List<Light> light;
+    private final List<Figure> figures;
     private Camera camera;
 
     public ConcreteSceneBuilder() {
@@ -20,27 +20,27 @@ public class ConcreteSceneBuilder implements SceneBuilder {
 
     @Override
     public SceneBuilder setHeight(int height) {
-        return null;
+        return this.height = height;
     }
 
     @Override
     public SceneBuilder setWidth(int width) {
-        return null;
+        return this.width = width;
     }
 
     @Override
     public SceneBuilder addLight(Light light) {
-        return null;
+        return this.light.add(light);
     }
 
     @Override
     public SceneBuilder addFigures(Figure figures) {
-        return null;
+        return this.figures.add(figures);
     }
 
     @Override
     public SceneBuilder setCamera(Camera camera) {
-        return null;
+        return this.camera = camera;
     }
 
     @Override
