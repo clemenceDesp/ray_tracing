@@ -19,28 +19,28 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     }
 
     @Override
-    public SceneBuilder setHeight(int height) {
-        return this.height = height;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     @Override
-    public SceneBuilder setWidth(int width) {
-        return this.width = width;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     @Override
-    public SceneBuilder addLight(Light light) {
-        return this.light.add(light);
+    public void addLight(Light light) {
+        this.light.add(light);
     }
 
     @Override
-    public SceneBuilder addFigures(Figure figures) {
-        return this.figures.add(figures);
+    public void addFigures(Figure figures) {
+        this.figures.add(figures);
     }
 
     @Override
-    public SceneBuilder setCamera(Camera camera) {
-        return this.camera = camera;
+    public void setCamera(Camera camera) {
+        this.camera = camera;
     }
 
     @Override
