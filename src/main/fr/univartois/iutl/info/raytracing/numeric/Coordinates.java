@@ -1,37 +1,58 @@
 package fr.univartois.iutl.info.raytracing.numeric;
 
+/**
+ * @author romeo.jacquemin
+ *
+ */
 public class Coordinates {
-	private int x;
-	private int y;
-	private int z;
-
-	public Coordinates(int x, int y, int z) {
+	private double x;
+	private double y;
+	private double z;
+	/** 	
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public Coordinates(double x, double y, double z) {
+		super();
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
-	
-	public int getX() {
+	/**
+	 * @return the x
+	 */
+	public double getX() {
 		return x;
 	}
-	
-	public void setX(int x) {
+	/**
+	 * @param x the x to set
+	 */
+	public void setX(double x) {
 		this.x = x;
 	}
-	
-	public int getY() {
+	/**
+	 * @return the y
+	 */
+	public double getY() {
 		return y;
 	}
-	
-	public void setY(int y) {
+	/**
+	 * @param y the y to set
+	 */
+	public void setY(double y) {
 		this.y = y;
 	}
-	
-	public int getZ() {
+	/**
+	 * @return the z
+	 */
+	public double getZ() {
 		return z;
 	}
-	
-	public void setZ(int z) {
+	/**
+	 * @param z the z to set
+	 */
+	public void setZ(double z) {
 		this.z = z;
 	}
 }
