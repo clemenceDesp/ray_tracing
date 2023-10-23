@@ -1,5 +1,8 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
+import fr.univartois.iutl.info.raytracing.parser.Light;
+import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +10,7 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     private int height;
     private int width;
     private final List<Light> light;
-    private final List<Figure> figures;
+    private final List<IFigure> figures;
     private Camera camera;
 
     public ConcreteSceneBuilder() {
@@ -34,7 +37,7 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     }
 
     @Override
-    public void addFigures(Figure figures) {
+    public void addFigures(IFigure figures) {
         this.figures.add(figures);
     }
 
@@ -45,6 +48,6 @@ public class ConcreteSceneBuilder implements SceneBuilder {
 
     @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(), figures.toArray(), camera);
+        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera);
     }
 }

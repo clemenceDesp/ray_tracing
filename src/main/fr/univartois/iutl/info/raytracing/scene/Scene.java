@@ -1,15 +1,18 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
+import fr.univartois.iutl.info.raytracing.parser.Light;
+import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+
 import java.util.List;
 
 public class Scene {
-    private int height;
-    private int width;
-    private Light[] light;
-    private Figure[] figures;
-    private Camera camera;
+    private final int height;
+    private final int width;
+    private final Light[] light;
+    private final IFigure[] figures;
+    private final Camera camera;
 
-    public Scene(int height, int width, Light[] light, Figure[] figures, Camera camera) {
+    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera) {
         this.height = height;
         this.width = width;
         this.light = light;
@@ -22,7 +25,6 @@ public class Scene {
      *
      * @return height of this scene, in pixels.
      */
-    @Override
     public int getHeight() {
         return 0;
     }
@@ -32,7 +34,6 @@ public class Scene {
      *
      * @return width of this scene, in pixels.
      */
-    @Override
     public int getWidth() {
         return 0;
     }
@@ -40,9 +41,8 @@ public class Scene {
     /**
      * Gives the list of all light in this scene.
      *
-     * @return list of all light in this scene.
+     * @return array of all light in this scene.
      */
-    @Override
     public Light[] getLight() {
         return null;
     }
@@ -50,10 +50,9 @@ public class Scene {
     /**
      * Gives the list of all figures in this scene.
      *
-     * @return list of all figures in this scene.
+     * @return array of all figures in this scene.
      */
-    @Override
-    public Figure[] getFigures() {
+    public IFigure[] getFigures() {
         return null;
     }
 
@@ -62,7 +61,6 @@ public class Scene {
      *
      * @return camera of this scene.
      */
-    @Override
     public Camera getCamera() {
         return null;
     }
