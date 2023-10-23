@@ -1,15 +1,15 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
 public interface SceneBuilder {
-    SceneBuilder setHeight(int height);
+    void setHeight(int height);
 
-    SceneBuilder setWidth(int width);
+    void setWidth(int width);
 
-    SceneBuilder addLight(Light light);
+    void addLight(Light light);
 
-    SceneBuilder addFigures(Figure figures);
+    void addFigures(Figure figures);
 
-    SceneBuilder setCamera(Camera camera);
+    void setCamera(Camera camera);
 
     Scene build();
 }
