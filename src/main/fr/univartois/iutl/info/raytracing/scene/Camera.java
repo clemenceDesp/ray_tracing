@@ -1,14 +1,15 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
 import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Vector;
 
 public class Camera {
     private final int fov;
     private final Point lookFrom;
     private final Point lookAt;
-    private final  Point up;
+    private final Vector up;
 
-    public Camera(int fov, Point lookFrom, Point lookAt, Point up) {
+    public Camera(int fov, Point lookFrom, Point lookAt, Vector up) {
         this.fov = fov;
         this.lookFrom = lookFrom;
         this.lookAt = lookAt;
@@ -27,7 +28,7 @@ public class Camera {
         return lookAt;
     }
 
-    public Point getUp() {
+    public Vector getUp() {
         return up;
     }
 }
