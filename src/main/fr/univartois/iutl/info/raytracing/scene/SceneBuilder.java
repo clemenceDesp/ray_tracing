@@ -1,5 +1,6 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
+import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 
@@ -39,6 +40,12 @@ public interface SceneBuilder {
      * @param output the output to set
      */
     void setOutput(String output);
+
+    /***
+     * Set the ambient light of the scene
+     * @param ambientLigth the ambient light to set
+     */
+    void setAmbient(Color ambientLigth);
 
     /***
      * Build the scene
