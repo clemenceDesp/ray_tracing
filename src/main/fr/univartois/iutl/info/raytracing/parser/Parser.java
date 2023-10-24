@@ -7,6 +7,8 @@ import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
+import fr.univartois.iutl.info.raytracing.parser.PunctualLight;
+import fr.univartois.iutl.info.raytracing.parser.DirectionalLight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
