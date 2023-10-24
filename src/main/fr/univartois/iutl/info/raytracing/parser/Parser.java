@@ -7,6 +7,8 @@ import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
+import fr.univartois.iutl.info.raytracing.parser.PunctualLight;
+import fr.univartois.iutl.info.raytracing.parser.DirectionalLight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -36,6 +38,14 @@ public class Parser {
     }
 
     /**
+     * Changes the image name.
+     * @param line Line that is being read.
+     */
+    private static void output(String[] line) {
+        sceneBuilder.setOutput(line[1]);
+    }
+
+    /**
      * Configures the camera.
      * @param line Line that is being read.
      */
@@ -57,7 +67,42 @@ public class Parser {
     }
 
     /**
-     * Configures a directional light.
+     * Changes the ambient color.
+     * @param line Line that is being read.
+     */
+    private static void ambient(String[] line) {
+        sceneBuilder.setAmbient(new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3])))));
+    }
+
+    /**
+     * Changes the diffuse color of the object.
+     * @param line Line that is being read.
+     */
+    private static void diffuse(String[] line) {
+        //TODO
+    }
+
+    /**
+     * Changes the reflected light.
+     * @param line Line that is being read.
+     */
+    private static void specular(String[] line) {
+        //TODO
+    }
+
+    /**
+     * Changes the shininess of the object.
+     * @param line Line that is being read.
+     */
+    private static void shininess(String[] line) {
+        //TODO
+    }
+
+    /**
+     * Adds a directional light in the scene.
      * @param line Line that is being read.
      */
     private static void directional(String[] line) {
@@ -73,7 +118,7 @@ public class Parser {
     }
 
     /**
-     * Configures a point light.
+     * Adds a punctual light in the scene.
      * @param line Line that is being read.
      */
     private static void point(String[] line) {
@@ -111,6 +156,46 @@ public class Parser {
         nbVerts += 1;
     }
 
+    /**
+     * Adds a triangle in the scene.
+     * @param line Line that is being read.
+     */
+    private static void tri(String[] line) {
+        if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
+            Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
+            sceneBuilder.addFigures(triangle);
+        }
+    }
+
+    /**
+     * Adds a sphere in the scene.
+     * @param line Line that is being read.
+     */
+    private static void sphere(String[] line) {
+        Sphere sphere = new Sphere(new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3])))),
+                Integer.parseInt(line[4]));
+        sceneBuilder.addFigures(sphere);
+    }
+
+    /**
+     * Adds a plane in the scene.
+     * @param line Line that is being read.
+     */
+    private static void plane(String[] line) {
+        Plane plane = new Plane(new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3])))),
+                new Vector(new Triplets(new Coordinates(
+                        Double.parseDouble(line[4]),
+                        Double.parseDouble(line[5]),
+                        Double.parseDouble(line[6])))));
+        sceneBuilder.addFigures(plane);
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -127,22 +212,22 @@ public class Parser {
                         size(line);
                         break;
                     case "output":
-                        //TODO
+                        output(line);
                         break;
                     case "camera":
                         camera(line);
                         break;
                     case "ambient":
-                        //TODO
+                        ambient(line);
                         break;
                     case "diffuse":
-                        //TODO
+                        diffuse(line);
                         break;
                     case "specular":
-                        //TODO
+                        specular(line);
                         break;
                     case "shininess":
-                        //TODO
+                        shininess(line);
                         break;
                     case "directional":
                         directional(line);
@@ -157,29 +242,13 @@ public class Parser {
                         vertex(line);
                         break;
                     case "tri":
-                        if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
-                            Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
-                            sceneBuilder.addFigures(triangle);
-                        }
+                        tri(line);
                         break;
                     case "sphere":
-                        Sphere sphere = new Sphere(new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3])))),
-                                Integer.parseInt(line[4]));
-                        sceneBuilder.addFigures(sphere);
+                        sphere(line);
                         break;
                     case "plane":
-                        Plane plane = new Plane(new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3])))),
-                                new Vector(new Triplets(new Coordinates(
-                                        Double.parseDouble(line[4]),
-                                        Double.parseDouble(line[5]),
-                                        Double.parseDouble(line[6])))));
-                        sceneBuilder.addFigures(plane);
+                        plane(line);
                         break;
                 }
             }
