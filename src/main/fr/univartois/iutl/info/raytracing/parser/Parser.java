@@ -111,6 +111,17 @@ public class Parser {
         nbVerts += 1;
     }
 
+    /**
+     * Adds a triangle in the scene.
+     * @param line Line that is being read.
+     */
+    private static void tri(String[] line) {
+        if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
+            Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
+            sceneBuilder.addFigures(triangle);
+        }
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -157,10 +168,7 @@ public class Parser {
                         vertex(line);
                         break;
                     case "tri":
-                        if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
-                            Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
-                            sceneBuilder.addFigures(triangle);
-                        }
+                        tri(line);
                         break;
                     case "sphere":
                         Sphere sphere = new Sphere(new Point(new Triplets(new Coordinates(
