@@ -1,7 +1,7 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
-import java.awt.Color;
-import java.awt.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Color;
+import fr.univartois.iutl.info.raytracing.numeric.Point;
 
 /**
  * @author felix
