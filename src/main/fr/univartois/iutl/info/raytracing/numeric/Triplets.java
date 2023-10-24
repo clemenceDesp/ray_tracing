@@ -57,7 +57,7 @@ public class Triplets {
 	 * @return Triplets
 	 * Multiply the triplets to an integer to create a new triplets
 	 */
-	public Triplets multiplication(int d) {
+	public Triplets multiplication(double d) {
 		return new Triplets(new Coordinates(pointA.getX()*d,pointA.getY()*d,pointA.getZ()*d));
 	}
 	

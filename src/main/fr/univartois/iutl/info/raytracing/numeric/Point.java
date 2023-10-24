@@ -65,7 +65,7 @@ public class Point {
 	 * @return Point
 	 * multiplicate a point with an integer to find a new point
 	 */
-	public Point multiplication(int d) {
+	public Point multiplication(double d) {
 		return new Point(triplets.multiplication(d));
 	}
 }
