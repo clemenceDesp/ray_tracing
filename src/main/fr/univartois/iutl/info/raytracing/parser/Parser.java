@@ -122,6 +122,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds a sphere in the scene.
+     * @param line Line that is being read.
+     */
+    private static void sphere(String[] line) {
+        Sphere sphere = new Sphere(new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3])))),
+                Integer.parseInt(line[4]));
+        sceneBuilder.addFigures(sphere);
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -171,12 +184,7 @@ public class Parser {
                         tri(line);
                         break;
                     case "sphere":
-                        Sphere sphere = new Sphere(new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3])))),
-                                Integer.parseInt(line[4]));
-                        sceneBuilder.addFigures(sphere);
+                        sphere(line);
                         break;
                     case "plane":
                         Plane plane = new Plane(new Point(new Triplets(new Coordinates(
