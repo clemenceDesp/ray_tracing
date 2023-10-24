@@ -1,6 +1,8 @@
 package fr.univartois.iutl.info.raytracing.parser.figure;
 
+import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Triangle} class represents a triangle.
@@ -19,6 +21,18 @@ public class Triangle implements IFigure {
      * The pointC of the triangle
      */
     protected Point pointC;
+    /**
+     * The diffuse color of the figure
+     */
+    private Color diffuse;
+    /**
+     * The reflected light
+     */
+    private Light specular;
+    /**
+     * The shininess
+     */
+    int shininess;
 
     /**
      * Constructor of triangle.
@@ -30,6 +44,9 @@ public class Triangle implements IFigure {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
+        this.diffuse = null;
+        this.specular = null;
+        this.shininess = -1;
     }
 
     /**
