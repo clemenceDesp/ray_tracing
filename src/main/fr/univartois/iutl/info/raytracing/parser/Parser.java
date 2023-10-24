@@ -71,7 +71,10 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void ambient(String[] line) {
-        //TODO
+        sceneBuilder.setAmbient(new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3])))));
     }
 
     /**
