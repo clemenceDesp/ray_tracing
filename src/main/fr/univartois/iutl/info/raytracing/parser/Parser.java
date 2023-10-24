@@ -27,9 +27,9 @@ public class Parser {
     private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
-     *
-     * @param width
-     * @param height
+     * Changes the width and height of the scene.
+     * @param width New width
+     * @param height New height
      */
     private static void size(int width, int height){
         sceneBuilder.setWidth(width);
@@ -39,22 +39,17 @@ public class Parser {
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
-        ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
         try {
             filereader = new FileReader(fileName);
             bufferedreader = new BufferedReader(filereader);
             String strCurrentLine;
-            Point[] verts = null;
-            int nbVerts = 0;
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 String[] line = strCurrentLine.split(" ");
                 switch (line[0]) {
-
                     case "#":
                         break;
                     case "size":
-                        sceneBuilder.setWidth(Integer.parseInt(line[1]));
-                        sceneBuilder.setHeight(Integer.parseInt(line[2]));
+                        size(Integer.parseInt(line[1]), Integer.parseInt(line[2]));
                         break;
                     case "output":
                         //TODO
