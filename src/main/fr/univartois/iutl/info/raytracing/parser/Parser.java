@@ -56,6 +56,22 @@ public class Parser {
         sceneBuilder.setCamera(new Camera(fov,lookFrom,lookAt,up));
     }
 
+    /**
+     * Configures a directional light.
+     * @param line Line that is being read.
+     */
+    private static void directional(String[] line) {
+        Point directional = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3]))));
+        Color color = new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        sceneBuilder.addLight(new DirectionalLight(directional, color));
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -90,15 +106,7 @@ public class Parser {
                         //TODO
                         break;
                     case "directional":
-                        Point directional = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3]))));
-                        Color color = new Color(new Triplets(new Coordinates(
-                                Double.parseDouble(line[4]),
-                                Double.parseDouble(line[5]),
-                                Double.parseDouble(line[6]))));
-                        sceneBuilder.addLight(new DirectionalLight(directional, color));
+                        directional(line);
                         break;
                     case "point":
                         Point point = new Point(new Triplets(new Coordinates(
