@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 public class RayTracing {
@@ -30,6 +31,7 @@ public class RayTracing {
 				Vector v4 = (u.multiplication(a)).addition(v.multiplication(b)).substraction(w);
 				Vector d = v4.normalization();
 				for (IFigure figure :scene.getFigures()) {
+					((Sphere) figure).setO(scene.getCamera().getLookFrom());
 					double t = figure.findInteraction(d);
 					if (t>=0) {
 						Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
@@ -37,7 +39,7 @@ public class RayTracing {
 					}
 					else {
 						Color color = new Color(0,0,0);						
-						scene.getImage().setRGB(i,j,color.getRGB());
+						scene.getImage().setRGB(j,i,color.getRGB());
 					}
 				}
 			}
