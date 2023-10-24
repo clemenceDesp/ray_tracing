@@ -44,4 +44,9 @@ public class Plane implements IFigure {
     public Vector getNormal() {
         return normal;
     }
+    
+    public double findInteraction(Vector d) {
+    	throw new UnsupportedOperationException("This function only works with a sphere for now");
+    }
+    
 }
