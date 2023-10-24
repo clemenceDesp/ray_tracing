@@ -88,6 +88,15 @@ public class Parser {
         sceneBuilder.addLight(new PunctualLight(point, color));
     }
 
+    /**
+     * Configures the length of the array that stores the points that will be created.
+     * @param line Line that is being read.
+     */
+    private static void maxVerts(String[] line) {
+        int nbPoints = Integer.parseInt(line[1]);
+        verts = new Point[nbPoints];
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -128,8 +137,7 @@ public class Parser {
                         point(line);
                         break;
                     case "maxverts":
-                        int nbPoints = Integer.parseInt(line[1]);
-                        verts = new Point[nbPoints];
+                        maxVerts(line);
                         break;
                     case "vertex":
                         if (verts != null) {
