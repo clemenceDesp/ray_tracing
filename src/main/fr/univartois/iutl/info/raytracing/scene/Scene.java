@@ -121,6 +121,16 @@ public class Scene {
     }
 
     /***
+     * gives pixel at position x,y
+     * @param x position x
+     * @param y position y
+     * @return pixel at position x,y
+     */
+    public Pixel getPixel(int x, int y) {
+        return image[x][y];
+    }
+
+    /***
      * Gives the output of this scene
      * @return the output of this scene
      */
