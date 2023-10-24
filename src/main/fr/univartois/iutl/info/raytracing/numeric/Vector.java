@@ -51,7 +51,7 @@ public class Vector {
 	 * @param d
 	 * @return
 	 */
-	public Vector multiplication(int d) {
+	public Vector multiplication(double d) {
 		return new Vector(triplets.multiplication(d));
 	}
 	
