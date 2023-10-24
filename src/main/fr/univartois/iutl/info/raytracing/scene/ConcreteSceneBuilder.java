@@ -12,6 +12,7 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     private final List<Light> light;
     private final List<IFigure> figures;
     private Camera camera;
+    private String output;
 
     public ConcreteSceneBuilder() {
         this.light = new ArrayList<>();
@@ -19,6 +20,7 @@ public class ConcreteSceneBuilder implements SceneBuilder {
         this.camera = null;
         this.height = 0;
         this.width = 0;
+        this.output = "output.png";
     }
 
     @Override
@@ -47,7 +49,12 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     }
 
     @Override
+    public void setOutput(String output) {
+        this.output = output;
+    }
+
+    @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera);
+        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output);
     }
 }
