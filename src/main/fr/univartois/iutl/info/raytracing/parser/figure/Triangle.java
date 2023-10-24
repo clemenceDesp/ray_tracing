@@ -2,6 +2,7 @@ package fr.univartois.iutl.info.raytracing.parser.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Vector;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
@@ -84,6 +85,10 @@ public class Triangle implements IFigure {
     @Override
     public Point getOrigin() {
         return pointA;
+    }
+    
+    public double findInteraction(Vector d) {
+    	throw new UnsupportedOperationException("This function only works with a sphere for now");
     }
 
     /**
