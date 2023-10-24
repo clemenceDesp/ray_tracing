@@ -137,4 +137,12 @@ public class Scene {
     public String getOutput() {
         return output;
     }
+
+    /***
+     * Gives the ambient light of this scene
+     * @return the ambient light of this scene
+     */
+    public Color getAmbientLigth() {
+        return ambientLigth;
+    }
 }
