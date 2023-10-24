@@ -6,14 +6,37 @@ import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
 import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
+import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Parser {
-    public static void read(String fileName) {
-    public static ConcreteSceneBuilder read(String fileName) {
+    /**
+     * Array that stores the points created using maxverts and vertex.
+     */
+    private static Point[] verts = null;
+    /**
+     * Number of elements in the verts array
+     */
+    private static int nbVerts = 0;
+    /**
+     * Scene builder instance
+     */
+    private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
+
+    /**
+     *
+     * @param width
+     * @param height
+     */
+    private static void size(int width, int height){
+        sceneBuilder.setWidth(width);
+        sceneBuilder.setHeight(height);
+    }
+
+    public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
         ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
@@ -118,7 +141,7 @@ public class Parser {
                         break;
                 }
             }
-            return sceneBuilder;
+            return sceneBuilder.build();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
