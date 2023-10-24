@@ -1,5 +1,6 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
+import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 
@@ -9,13 +10,18 @@ public class Scene {
     private final Light[] light;
     private final IFigure[] figures;
     private final Camera camera;
+    private final Point[][] image;
 
-    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera) {
+    private final String output;
+
+    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera, String output) {
         this.height = height;
         this.width = width;
         this.light = light;
         this.figures = figures;
         this.camera = camera;
+        this.output = output;
+        this.image = new Point[width][height];
     }
 
     /**
@@ -61,5 +67,13 @@ public class Scene {
      */
     public Camera getCamera() {
         return camera;
+    }
+
+    public Point[][] getImage() {
+        return image;
+    }
+
+    public String getOutput() {
+        return output;
     }
 }
