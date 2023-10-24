@@ -56,6 +56,61 @@ public class Parser {
         sceneBuilder.setCamera(new Camera(fov,lookFrom,lookAt,up));
     }
 
+    /**
+     * Configures a directional light.
+     * @param line Line that is being read.
+     */
+    private static void directional(String[] line) {
+        Point directional = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3]))));
+        Color color = new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        sceneBuilder.addLight(new DirectionalLight(directional, color));
+    }
+
+    /**
+     * Configures a point light.
+     * @param line Line that is being read.
+     */
+    private static void point(String[] line) {
+        Point point = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3]))));
+        Color color = new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        sceneBuilder.addLight(new PunctualLight(point, color));
+    }
+
+    /**
+     * Configures the length of the array that stores the points that will be created.
+     * @param line Line that is being read.
+     */
+    private static void maxVerts(String[] line) {
+        int nbPoints = Integer.parseInt(line[1]);
+        verts = new Point[nbPoints];
+    }
+
+    /**
+     * Adds a point to the verts array.
+     * @param line Line that is being read.
+     */
+    private static void vertex(String[] line) {
+        if (verts != null) {
+            verts[nbVerts] = new Point(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3]))));
+        }
+        nbVerts += 1;
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -90,37 +145,17 @@ public class Parser {
                         //TODO
                         break;
                     case "directional":
-                        Point directional = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3]))));
-                        Color color = new Color(new Triplets(new Coordinates(
-                                Double.parseDouble(line[4]),
-                                Double.parseDouble(line[5]),
-                                Double.parseDouble(line[6]))));
-                        sceneBuilder.addLight(new DirectionalLight(directional, color));
+                        directional(line);
                         break;
                     case "point":
-                        Point point = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3]))));
-                        color = new Color(new Triplets(new Coordinates(
-                                Double.parseDouble(line[4]),
-                                Double.parseDouble(line[5]),
-                                Double.parseDouble(line[6]))));
-                        sceneBuilder.addLight(new PunctualLight(point, color));
+                        point(line);
                         break;
                     case "maxverts":
-                        int nbPoints = Integer.parseInt(line[1]);
-                        verts = new Point[nbPoints];
+                        maxVerts(line);
+                        break;
                     case "vertex":
-                        if (verts != null) {
-                            verts[nbVerts] = new Point(new Triplets(new Coordinates(
-                                    Double.parseDouble(line[1]),
-                                    Double.parseDouble(line[2]),
-                                    Double.parseDouble(line[3]))));
-                        }
+                        vertex(line);
+                        break;
                     case "tri":
                         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
                             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
