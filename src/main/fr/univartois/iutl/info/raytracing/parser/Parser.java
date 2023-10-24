@@ -73,7 +73,7 @@ public class Parser {
     }
 
     /**
-     * Adds a point light in the scene.
+     * Adds a punctual light in the scene.
      * @param line Line that is being read.
      */
     private static void point(String[] line) {
