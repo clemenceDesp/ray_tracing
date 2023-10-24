@@ -49,7 +49,7 @@ public class Color {
 	 * @return Color
 	 * multiplicate the rgb coordinates with an integer
 	 */
-	public Color multiplication(int d) {
+	public Color multiplication(double d) {
 		return new Color(triplets.multiplication(d));
 	}
 	
