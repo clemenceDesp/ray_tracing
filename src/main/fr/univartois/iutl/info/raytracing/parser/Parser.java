@@ -28,12 +28,11 @@ public class Parser {
 
     /**
      * Changes the width and height of the scene.
-     * @param width New width
-     * @param height New height
+     * @param line Line that is being read.
      */
-    private static void size(int width, int height){
-        sceneBuilder.setWidth(width);
-        sceneBuilder.setHeight(height);
+    private static void size(String[] line){
+        sceneBuilder.setWidth(Integer.parseInt(line[1]));
+        sceneBuilder.setHeight(Integer.parseInt(line[2]));
     }
 
     private static void camera(String[] line) {
@@ -66,7 +65,7 @@ public class Parser {
                     case "#":
                         break;
                     case "size":
-                        size(Integer.parseInt(line[1]), Integer.parseInt(line[2]));
+                        size(line);
                         break;
                     case "output":
                         //TODO
