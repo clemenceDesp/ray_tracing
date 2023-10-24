@@ -24,8 +24,9 @@ public class Parser {
      */
     private static int nbVerts = 0;
     /**
-     * Scene builder instance
+     * Array that stores diffuse information.
      */
+    private static String[] stockDiffuse;
     private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
@@ -78,11 +79,11 @@ public class Parser {
     }
 
     /**
-     * Changes the diffuse color of the object.
+     * Stores the diffuse color of the object.
      * @param line Line that is being read.
      */
     private static void diffuse(String[] line) {
-        //TODO
+        stockDiffuse = line;
     }
 
     /**
