@@ -17,9 +17,9 @@ public interface IFigure {
     Point getOrigin();
 
     /**
-     * Gives the diffuse color of the object.
+     * Gives the diffuse color of the figure.
      *
-     * @return The diffuse color of the object.
+     * @return The diffuse color of the figure.
      */
     Color getDiffuse();
 
@@ -31,9 +31,9 @@ public interface IFigure {
     Light getSpecular();
 
     /**
-     * Gives the shininess of the object.
+     * Gives the shininess of the figure.
      *
-     * @return The shininess of the object.
+     * @return The shininess of the figure.
      */
     int getShininess();
 }
