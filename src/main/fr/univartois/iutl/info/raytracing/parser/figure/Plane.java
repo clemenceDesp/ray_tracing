@@ -95,9 +95,30 @@ public class Plane implements IFigure {
     /**
      * Changes the diffuse color.
      *
-     * @return The normal of this figure.
+     * @param diffuse The new diffuse color.
      */
-    public Vector getNormal() {
-        return normal;
+    @Override
+    public void setDiffuse(Color diffuse) {
+        this.diffuse = diffuse;
+    }
+
+    /**
+     * Changes the reflected light.
+     *
+     * @param specular The new reflected light.
+     */
+    @Override
+    public void setSpecular(Light specular) {
+        this.specular = specular;
+    }
+
+    /**
+     * Changes the shininess.
+     *
+     * @param shininess The new shininess.
+     */
+    @Override
+    public void setShininess(int shininess) {
+        this.shininess = shininess;
     }
 }
