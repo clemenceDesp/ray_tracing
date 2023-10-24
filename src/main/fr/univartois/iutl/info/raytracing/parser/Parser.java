@@ -130,6 +130,7 @@ public class Parser {
                     case "maxverts":
                         int nbPoints = Integer.parseInt(line[1]);
                         verts = new Point[nbPoints];
+                        break;
                     case "vertex":
                         if (verts != null) {
                             verts[nbVerts] = new Point(new Triplets(new Coordinates(
@@ -137,6 +138,7 @@ public class Parser {
                                     Double.parseDouble(line[2]),
                                     Double.parseDouble(line[3]))));
                         }
+                        break;
                     case "tri":
                         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
                             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
