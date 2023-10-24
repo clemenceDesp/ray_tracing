@@ -13,6 +13,6 @@ public interface SceneBuilder {
     void addFigures(IFigure figures);
 
     void setCamera(Camera camera);
-
+    void setOutput(String output);
     Scene build();
 }
