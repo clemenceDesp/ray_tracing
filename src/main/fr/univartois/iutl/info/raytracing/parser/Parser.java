@@ -31,6 +31,13 @@ public class Parser {
      * Array that stores specular information.
      */
     private static String[] stockSpecular;
+    /**
+     * Array that stores shininess information.
+     */
+    private static String[] stockShininess;
+    /**
+     * Scene builder instance
+     */
     private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
@@ -99,11 +106,11 @@ public class Parser {
     }
 
     /**
-     * Changes the shininess of the object.
+     * Stores the shininess of the object.
      * @param line Line that is being read.
      */
     private static void shininess(String[] line) {
-        //TODO
+        stockShininess = line;
     }
 
     /**
