@@ -1,6 +1,8 @@
 package fr.univartois.iutl.info.raytracing.parser.figure;
 
+import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Sphere} class represents a sphere.
@@ -14,6 +16,18 @@ public class Sphere implements IFigure {
      * The radius of the sphere
      */
     protected double radius;
+    /**
+     * The diffuse color of the figure
+     */
+    private Color diffuse;
+    /**
+     * The reflected light
+     */
+    private Light specular;
+    /**
+     * The shininess
+     */
+    int shininess;
 
     /**
      * Constructor of sphere.
@@ -23,6 +37,9 @@ public class Sphere implements IFigure {
     public Sphere(Point center, double radius) {
         this.center = center;
         this.radius = radius;
+        this.diffuse = null;
+        this.specular = null;
+        this.shininess = -1;
     }
 
     /**
