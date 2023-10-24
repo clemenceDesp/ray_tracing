@@ -38,6 +38,14 @@ public class Parser {
     }
 
     /**
+     * Changes the image name.
+     * @param line Line that is being read.
+     */
+    private static void output(String[] line) {
+        sceneBuilder.setOutput(line[1]);
+    }
+
+    /**
      * Configures the camera.
      * @param line Line that is being read.
      */
@@ -169,7 +177,7 @@ public class Parser {
                         size(line);
                         break;
                     case "output":
-                        //TODO
+                        output(line);
                         break;
                     case "camera":
                         camera(line);
