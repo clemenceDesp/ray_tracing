@@ -9,6 +9,12 @@ import java.awt.Point;
  */
 public class PunctualLight implements Light {
 	
+	public PunctualLight(Point coordinates, Color colors) {
+		super();
+		this.coordinates = coordinates;
+		this.colors = colors;
+	}
+
 	/**
 	 * the coordinates of the light
 	 */

@@ -9,6 +9,12 @@ import java.awt.Point;
  */
 public class DirectionalLight implements Light{
 
+	public DirectionalLight(Point coordinates, Color colors) {
+		super();
+		this.coordinates = coordinates;
+		this.colors = colors;
+	}
+
 	/**
 	 * the coordinates of the light
 	 */
