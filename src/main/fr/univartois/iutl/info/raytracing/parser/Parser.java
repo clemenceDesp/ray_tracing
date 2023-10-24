@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class Parser {
     public static void read(String fileName) {
+    public static ConcreteSceneBuilder read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
         ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
@@ -117,6 +118,7 @@ public class Parser {
                         break;
                 }
             }
+            return sceneBuilder;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
