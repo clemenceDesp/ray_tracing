@@ -1,6 +1,6 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
-import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 
@@ -34,12 +34,17 @@ public class Scene {
     /***
      * The image of the scene
      */
-    private final Point[][] image;
+    private final Pixel[][] image;
 
     /***
      * The output of the scene
      */
     private final String output;
+
+    /***
+     * The ambient light of the scene
+     */
+    private final Color ambientLigth;
 
     /***
      * Create a new scene
@@ -49,15 +54,17 @@ public class Scene {
      * @param figures the list of figures of the scene
      * @param camera the camera of the scene
      * @param output the output of the scene
+     * @param ambientLigth the ambient light of the scene
      */
-    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera, String output) {
+    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera, String output, Color ambientLigth) {
         this.height = height;
         this.width = width;
         this.light = light;
         this.figures = figures;
         this.camera = camera;
         this.output = output;
-        this.image = new Point[width][height];
+        this.ambientLigth = ambientLigth;
+        this.image = new Pixel[width][height];
     }
 
     /**
@@ -109,7 +116,7 @@ public class Scene {
      * Gives the image of this scene
      * @return the image of this scene
      */
-    public Point[][] getImage() {
+    public Pixel[][] getImage() {
         return image;
     }
 
