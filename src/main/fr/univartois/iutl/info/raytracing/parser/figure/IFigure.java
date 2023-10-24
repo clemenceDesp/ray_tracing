@@ -36,4 +36,22 @@ public interface IFigure {
      * @return The shininess of the figure.
      */
     int getShininess();
+
+    /**
+     * Changes the diffuse color.
+     * @param diffuse The new diffuse color.
+     */
+    void setDiffuse(Color diffuse);
+
+    /**
+     * Changes the reflected light.
+     * @param specular The new reflected light.
+     */
+    void setSpecular(Light specular);
+
+    /**
+     * Changes the shininess.
+     * @param shininess The new shininess.
+     */
+    void setShininess(int shininess);
 }
