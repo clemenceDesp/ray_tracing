@@ -17,6 +17,16 @@ public class Plane implements IFigure {
     protected Vector normal;
 
     /**
+     * Constructor of plane.
+     * @param point A point of the plane.
+     * @param normal A normal of a plane.
+     */
+    public Plane(Point point, Vector normal) {
+        this.point = point;
+        this.normal = normal;
+    }
+
+    /**
      * Gives the point of origin of this figure.
      *
      * @return The point of origin of this figure.

@@ -16,6 +16,16 @@ public class Sphere implements IFigure {
     protected double radius;
 
     /**
+     * Constructor of sphere.
+     * @param center The center of the sphere.
+     * @param radius The radius of the sphere.
+     */
+    public Sphere(Point center, double radius) {
+        this.center = center;
+        this.radius = radius;
+    }
+
+    /**
      * Gives the center of this sphere.
      *
      * @return The center of this sphere.

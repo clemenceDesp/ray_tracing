@@ -10,6 +10,7 @@ public class Triangle implements IFigure {
      * The pointA of the triangle
      */
     protected Point pointA;
+
     /**
      * The pointB of the triangle
      */
@@ -18,6 +19,18 @@ public class Triangle implements IFigure {
      * The pointC of the triangle
      */
     protected Point pointC;
+
+    /**
+     * Constructor of triangle.
+     * @param pointA The pointA of this triangle.
+     * @param pointB The pointB of this triangle.
+     * @param pointC The pointC of this triangle.
+     */
+    public Triangle(Point pointA, Point pointB, Point pointC) {
+        this.pointA = pointA;
+        this.pointB = pointB;
+        this.pointC = pointC;
+    }
 
     /**
      * Gives the pointA of this triangle.
