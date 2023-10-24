@@ -67,6 +67,38 @@ public class Parser {
     }
 
     /**
+     * Changes the ambient color.
+     * @param line Line that is being read.
+     */
+    private static void ambient(String[] line) {
+        //TODO
+    }
+
+    /**
+     * Changes the diffuse color of the object.
+     * @param line Line that is being read.
+     */
+    private static void diffuse(String[] line) {
+        //TODO
+    }
+
+    /**
+     * Changes the reflected light.
+     * @param line Line that is being read.
+     */
+    private static void specular(String[] line) {
+        //TODO
+    }
+
+    /**
+     * Changes the shininess of the object.
+     * @param line Line that is being read.
+     */
+    private static void shininess(String[] line) {
+        //TODO
+    }
+
+    /**
      * Adds a directional light in the scene.
      * @param line Line that is being read.
      */
@@ -183,16 +215,16 @@ public class Parser {
                         camera(line);
                         break;
                     case "ambient":
-                        //TODO
+                        ambient(line);
                         break;
                     case "diffuse":
-                        //TODO
+                        diffuse(line);
                         break;
                     case "specular":
-                        //TODO
+                        specular(line);
                         break;
                     case "shininess":
-                        //TODO
+                        shininess(line);
                         break;
                     case "directional":
                         directional(line);
