@@ -4,6 +4,8 @@ import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 
+import java.awt.image.BufferedImage;
+
 public class Scene {
 
     /***
@@ -34,7 +36,7 @@ public class Scene {
     /***
      * The image of the scene
      */
-    private final Pixel[][] image;
+    private final BufferedImage image;
 
     /***
      * The output of the scene
@@ -64,7 +66,7 @@ public class Scene {
         this.camera = camera;
         this.output = output;
         this.ambientLigth = ambientLigth;
-        this.image = new Pixel[width][height];
+        this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
     /**
@@ -116,18 +118,8 @@ public class Scene {
      * Gives the image of this scene
      * @return the image of this scene
      */
-    public Pixel[][] getImage() {
+    public BufferedImage getImage() {
         return image;
-    }
-
-    /***
-     * gives pixel at position x,y
-     * @param x position x
-     * @param y position y
-     * @return pixel at position x,y
-     */
-    public Pixel getPixel(int x, int y) {
-        return image[x][y];
     }
 
     /***
