@@ -3,8 +3,6 @@ package fr.univartois.iutl.info.raytracing.scene;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 
-import java.util.List;
-
 public class Scene {
     private final int height;
     private final int width;
@@ -26,7 +24,7 @@ public class Scene {
      * @return height of this scene, in pixels.
      */
     public int getHeight() {
-        return 0;
+        return height;
     }
 
     /**
@@ -35,7 +33,7 @@ public class Scene {
      * @return width of this scene, in pixels.
      */
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     /**
@@ -44,7 +42,7 @@ public class Scene {
      * @return array of all light in this scene.
      */
     public Light[] getLight() {
-        return null;
+        return light;
     }
 
     /**
@@ -53,7 +51,7 @@ public class Scene {
      * @return array of all figures in this scene.
      */
     public IFigure[] getFigures() {
-        return null;
+        return figures;
     }
 
     /**
@@ -62,6 +60,6 @@ public class Scene {
      * @return camera of this scene.
      */
     public Camera getCamera() {
-        return null;
+        return camera;
     }
 }
