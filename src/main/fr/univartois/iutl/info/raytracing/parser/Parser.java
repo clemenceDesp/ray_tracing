@@ -53,6 +53,7 @@ public class Parser {
                         break;
                     case "output":
                         //TODO
+                        break;
                     case "camera":
                         Point lookFrom = new Point(new Triplets(new Coordinates(
                                 Double.parseDouble(line[1]),
@@ -71,12 +72,16 @@ public class Parser {
                         break;
                     case "ambient":
                         //TODO
+                        break;
                     case "diffuse":
                         //TODO
+                        break;
                     case "specular":
                         //TODO
+                        break;
                     case "shininess":
                         //TODO
+                        break;
                     case "directional":
                         Point directional = new Point(new Triplets(new Coordinates(
                                 Double.parseDouble(line[1]),
@@ -149,5 +154,6 @@ public class Parser {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 }
