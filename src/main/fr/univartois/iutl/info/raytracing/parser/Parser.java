@@ -36,6 +36,23 @@ public class Parser {
         sceneBuilder.setHeight(height);
     }
 
+    private static void camera(String[] line) {
+        Point lookFrom = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3]))));
+        Point lookAt = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        Vector up = new Vector(new Triplets(new Coordinates(
+                Double.parseDouble(line[7]),
+                Double.parseDouble(line[8]),
+                Double.parseDouble(line[9]))));
+        int fov = Integer.parseInt(line[10]);
+        sceneBuilder.setCamera(new Camera(fov,lookFrom,lookAt,up));
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -55,20 +72,7 @@ public class Parser {
                         //TODO
                         break;
                     case "camera":
-                        Point lookFrom = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3]))));
-                        Point lookAt = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[4]),
-                                Double.parseDouble(line[5]),
-                                Double.parseDouble(line[6]))));
-                        Vector up = new Vector(new Triplets(new Coordinates(
-                                Double.parseDouble(line[7]),
-                                Double.parseDouble(line[8]),
-                                Double.parseDouble(line[9]))));
-                        int fov = Integer.parseInt(line[10]);
-                        sceneBuilder.setCamera(new Camera(fov,lookFrom,lookAt,up));
+                        camera(line);
                         break;
                     case "ambient":
                         //TODO
