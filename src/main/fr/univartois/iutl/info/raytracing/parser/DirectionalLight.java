@@ -1,13 +1,19 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
-import java.awt.Color;
-import java.awt.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Color;
+import fr.univartois.iutl.info.raytracing.numeric.Point;
 
 /**
  * @author felix
  *
  */
 public class DirectionalLight implements Light{
+
+	public DirectionalLight(Point coordinates, Color colors) {
+		super();
+		this.coordinates = coordinates;
+		this.colors = colors;
+	}
 
 	/**
 	 * the coordinates of the light

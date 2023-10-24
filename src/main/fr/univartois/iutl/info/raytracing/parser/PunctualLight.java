@@ -1,7 +1,7 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
-import java.awt.Color;
-import java.awt.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Color;
+import fr.univartois.iutl.info.raytracing.numeric.Point;
 
 /**
  * @author felix
@@ -9,6 +9,12 @@ import java.awt.Point;
  */
 public class PunctualLight implements Light {
 	
+	public PunctualLight(Point coordinates, Color colors) {
+		super();
+		this.coordinates = coordinates;
+		this.colors = colors;
+	}
+
 	/**
 	 * the coordinates of the light
 	 */
