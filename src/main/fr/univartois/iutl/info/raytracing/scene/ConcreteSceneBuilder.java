@@ -1,5 +1,8 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
+import fr.univartois.iutl.info.raytracing.numeric.Color;
+import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
+import fr.univartois.iutl.info.raytracing.numeric.Triplets;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 
@@ -38,6 +41,11 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     private String output;
 
+    /***
+     * The ambient light of the scene
+     */
+    private Color ambientLight;
+
 
     /***
      * Create a new scene builder
@@ -49,6 +57,7 @@ public class ConcreteSceneBuilder implements SceneBuilder {
         this.height = 0;
         this.width = 0;
         this.output = "output.png";
+        this.ambientLight = new Color(new Triplets(new Coordinates(0, 0, 0)));
     }
 
     /***
@@ -106,11 +115,20 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     }
 
     /***
+     * Set the ambient light of the scene
+     * @param ambientLight the ambient light to set
+     */
+    @Override
+    public void setAmbient(Color ambientLight) {
+        this.ambientLight = ambientLight;
+    }
+
+    /***
      * Build the scene
      * @return the scene
      */
     @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output);
+        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight);
     }
 }
