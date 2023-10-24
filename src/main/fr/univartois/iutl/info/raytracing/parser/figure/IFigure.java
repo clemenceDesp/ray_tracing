@@ -28,7 +28,7 @@ public interface IFigure {
      *
      * @return The reflected light.
      */
-    Light getSpecular();
+    Color getSpecular();
 
     /**
      * Gives the shininess of the figure.
@@ -47,7 +47,7 @@ public interface IFigure {
      * Changes the reflected light.
      * @param specular The new reflected light.
      */
-    void setSpecular(Light specular);
+    void setSpecular(Color specular);
 
     /**
      * Changes the shininess.

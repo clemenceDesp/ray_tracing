@@ -23,7 +23,7 @@ public class Sphere implements IFigure {
     /**
      * The reflected light
      */
-    private Light specular;
+    private Color specular;
     /**
      * The shininess
      */
@@ -86,7 +86,7 @@ public class Sphere implements IFigure {
      * @return The reflected light.
      */
     @Override
-    public Light getSpecular() {
+    public Color getSpecular() {
         return specular;
     }
 
@@ -116,7 +116,7 @@ public class Sphere implements IFigure {
      * @param specular The new reflected light.
      */
     @Override
-    public void setSpecular(Light specular) {
+    public void setSpecular(Color specular) {
         this.specular = specular;
     }
 

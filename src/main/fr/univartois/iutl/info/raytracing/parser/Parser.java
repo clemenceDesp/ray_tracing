@@ -1,6 +1,7 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.*;
+import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.parser.figure.Plane;
 import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
 import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
@@ -23,6 +24,18 @@ public class Parser {
      * Number of elements in the verts array
      */
     private static int nbVerts = 0;
+    /**
+     * Array that stores diffuse information.
+     */
+    private static String[] stockDiffuse;
+    /**
+     * Array that stores specular information.
+     */
+    private static String[] stockSpecular;
+    /**
+     * Array that stores shininess information.
+     */
+    private static String[] stockShininess;
     /**
      * Scene builder instance
      */
@@ -78,27 +91,27 @@ public class Parser {
     }
 
     /**
-     * Changes the diffuse color of the object.
+     * Stores the diffuse color of the object.
      * @param line Line that is being read.
      */
     private static void diffuse(String[] line) {
-        //TODO
+        stockDiffuse = line;
     }
 
     /**
-     * Changes the reflected light.
+     * Stores the reflected light.
      * @param line Line that is being read.
      */
     private static void specular(String[] line) {
-        //TODO
+        stockSpecular = line;
     }
 
     /**
-     * Changes the shininess of the object.
+     * Stores the shininess of the object.
      * @param line Line that is being read.
      */
     private static void shininess(String[] line) {
-        //TODO
+        stockShininess = line;
     }
 
     /**
@@ -163,6 +176,7 @@ public class Parser {
     private static void tri(String[] line) {
         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
+            particularities(line, triangle);
             sceneBuilder.addFigures(triangle);
         }
     }
@@ -177,6 +191,7 @@ public class Parser {
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3])))),
                 Integer.parseInt(line[4]));
+        particularities(line, sphere);
         sceneBuilder.addFigures(sphere);
     }
 
@@ -193,7 +208,31 @@ public class Parser {
                         Double.parseDouble(line[4]),
                         Double.parseDouble(line[5]),
                         Double.parseDouble(line[6])))));
+        particularities(line, plane);
         sceneBuilder.addFigures(plane);
+    }
+
+    /**
+     * Add particularities to figures.
+     * @param line Line that is being read.
+     * @param figure Figure which will be modified or not.
+     */
+    private static void particularities(String[] line, IFigure figure) {
+        if (stockDiffuse != null) {
+            figure.setDiffuse(new Color(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3])))));
+        }
+        if (stockSpecular != null) {
+            figure.setSpecular(new Color(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3])))));
+        }
+        if (stockShininess != null) {
+            figure.setShininess(Integer.parseInt(line[1]));
+        }
     }
 
     public static Scene read(String fileName) {
