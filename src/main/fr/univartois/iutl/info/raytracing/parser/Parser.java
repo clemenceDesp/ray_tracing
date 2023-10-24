@@ -97,6 +97,20 @@ public class Parser {
         verts = new Point[nbPoints];
     }
 
+    /**
+     * Adds a point to the verts array.
+     * @param line Line that is being read.
+     */
+    private static void vertex(String[] line) {
+        if (verts != null) {
+            verts[nbVerts] = new Point(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3]))));
+        }
+        nbVerts += 1;
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -140,12 +154,7 @@ public class Parser {
                         maxVerts(line);
                         break;
                     case "vertex":
-                        if (verts != null) {
-                            verts[nbVerts] = new Point(new Triplets(new Coordinates(
-                                    Double.parseDouble(line[1]),
-                                    Double.parseDouble(line[2]),
-                                    Double.parseDouble(line[3]))));
-                        }
+                        vertex(line);
                         break;
                     case "tri":
                         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
