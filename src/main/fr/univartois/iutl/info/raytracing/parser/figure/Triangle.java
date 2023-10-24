@@ -85,4 +85,34 @@ public class Triangle implements IFigure {
     public Point getOrigin() {
         return pointA;
     }
+
+    /**
+     * Gives the diffuse color of the figure.
+     *
+     * @return The diffuse color of the figure.
+     */
+    @Override
+    public Color getDiffuse() {
+        return diffuse;
+    }
+
+    /**
+     * Gives the reflected light.
+     *
+     * @return The reflected light.
+     */
+    @Override
+    public Light getSpecular() {
+        return specular;
+    }
+
+    /**
+     * Gives the shininess of the figure.
+     *
+     * @return The shininess of the figure.
+     */
+    @Override
+    public int getShininess() {
+        return shininess;
+    }
 }
