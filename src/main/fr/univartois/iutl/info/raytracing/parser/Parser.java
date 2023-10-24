@@ -27,6 +27,10 @@ public class Parser {
      * Array that stores diffuse information.
      */
     private static String[] stockDiffuse;
+    /**
+     * Array that stores specular information.
+     */
+    private static String[] stockSpecular;
     private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
@@ -87,11 +91,11 @@ public class Parser {
     }
 
     /**
-     * Changes the reflected light.
+     * Stores the reflected light.
      * @param line Line that is being read.
      */
     private static void specular(String[] line) {
-        //TODO
+        stockSpecular = line;
     }
 
     /**
