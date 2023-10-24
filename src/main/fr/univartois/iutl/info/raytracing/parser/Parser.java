@@ -27,61 +27,68 @@ public class Parser {
     private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
-     *
-     * @param width
-     * @param height
+     * Changes the width and height of the scene.
+     * @param line Line that is being read.
      */
-    private static void size(int width, int height){
-        sceneBuilder.setWidth(width);
-        sceneBuilder.setHeight(height);
+    private static void size(String[] line){
+        sceneBuilder.setWidth(Integer.parseInt(line[1]));
+        sceneBuilder.setHeight(Integer.parseInt(line[2]));
+    }
+
+    /**
+     * Configures the camera.
+     * @param line Line that is being read.
+     */
+    private static void camera(String[] line) {
+        Point lookFrom = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3]))));
+        Point lookAt = new Point(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        Vector up = new Vector(new Triplets(new Coordinates(
+                Double.parseDouble(line[7]),
+                Double.parseDouble(line[8]),
+                Double.parseDouble(line[9]))));
+        int fov = Integer.parseInt(line[10]);
+        sceneBuilder.setCamera(new Camera(fov,lookFrom,lookAt,up));
     }
 
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
-        ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
         try {
             filereader = new FileReader(fileName);
             bufferedreader = new BufferedReader(filereader);
             String strCurrentLine;
-            Point[] verts = null;
-            int nbVerts = 0;
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 String[] line = strCurrentLine.split(" ");
                 switch (line[0]) {
-
                     case "#":
                         break;
                     case "size":
-                        sceneBuilder.setWidth(Integer.parseInt(line[1]));
-                        sceneBuilder.setHeight(Integer.parseInt(line[2]));
+                        size(line);
                         break;
                     case "output":
                         //TODO
+                        break;
                     case "camera":
-                        Point lookFrom = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[1]),
-                                Double.parseDouble(line[2]),
-                                Double.parseDouble(line[3]))));
-                        Point lookAt = new Point(new Triplets(new Coordinates(
-                                Double.parseDouble(line[4]),
-                                Double.parseDouble(line[5]),
-                                Double.parseDouble(line[6]))));
-                        Vector up = new Vector(new Triplets(new Coordinates(
-                                Double.parseDouble(line[7]),
-                                Double.parseDouble(line[8]),
-                                Double.parseDouble(line[9]))));
-                        int fov = Integer.parseInt(line[10]);
-                        sceneBuilder.setCamera(new Camera(fov,lookFrom,lookAt,up));
+                        camera(line);
                         break;
                     case "ambient":
                         //TODO
+                        break;
                     case "diffuse":
                         //TODO
+                        break;
                     case "specular":
                         //TODO
+                        break;
                     case "shininess":
                         //TODO
+                        break;
                     case "directional":
                         Point directional = new Point(new Triplets(new Coordinates(
                                 Double.parseDouble(line[1]),
@@ -154,5 +161,6 @@ public class Parser {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 }
