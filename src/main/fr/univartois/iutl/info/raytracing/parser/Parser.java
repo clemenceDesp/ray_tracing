@@ -35,6 +35,10 @@ public class Parser {
         sceneBuilder.setHeight(Integer.parseInt(line[2]));
     }
 
+    /**
+     * Configures the camera.
+     * @param line Line that is being read.
+     */
     private static void camera(String[] line) {
         Point lookFrom = new Point(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
