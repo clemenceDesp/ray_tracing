@@ -57,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Configures a directional light.
+     * Adds a directional light in the scene.
      * @param line Line that is being read.
      */
     private static void directional(String[] line) {
@@ -73,7 +73,7 @@ public class Parser {
     }
 
     /**
-     * Configures a point light.
+     * Adds a point light in the scene.
      * @param line Line that is being read.
      */
     private static void point(String[] line) {
