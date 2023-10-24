@@ -1,7 +1,9 @@
 package fr.univartois.iutl.info.raytracing.parser.figure;
 
+import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
+import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Plane} class represents a plane.
@@ -10,11 +12,23 @@ public class Plane implements IFigure {
     /**
      * A point of the plane
      */
-    protected Point point;
+    private Point point;
     /**
      * A normal of a plane
      */
-    protected Vector normal;
+    private Vector normal;
+    /**
+     * The diffuse color of the figure
+     */
+    private Color diffuse;
+    /**
+     * The reflected light
+     */
+    private Color specular;
+    /**
+     * The shininess
+     */
+    int shininess;
 
     /**
      * Constructor of plane.
@@ -24,6 +38,9 @@ public class Plane implements IFigure {
     public Plane(Point point, Vector normal) {
         this.point = point;
         this.normal = normal;
+        this.diffuse = null;
+        this.specular = null;
+        this.shininess = -1;
     }
 
     /**
@@ -48,5 +65,65 @@ public class Plane implements IFigure {
     public double findInteraction(Vector d) {
     	throw new UnsupportedOperationException("This function only works with a sphere for now");
     }
-    
+
+
+    /**
+     * Gives the diffuse color of the figure.
+     *
+     * @return The diffuse color of the figure.
+     */
+    @Override
+    public Color getDiffuse() {
+        return diffuse;
+    }
+
+    /**
+     * Gives the reflected light.
+     *
+     * @return The reflected light.
+     */
+    @Override
+    public Color getSpecular() {
+        return specular;
+    }
+
+    /**
+     * Gives the shininess of the figure.
+     *
+     * @return The shininess of the figure.
+     */
+    @Override
+    public int getShininess() {
+        return shininess;
+    }
+
+    /**
+     * Changes the diffuse color.
+     *
+     * @param diffuse The new diffuse color.
+     */
+    @Override
+    public void setDiffuse(Color diffuse) {
+        this.diffuse = diffuse;
+    }
+
+    /**
+     * Changes the reflected light.
+     *
+     * @param specular The new reflected light.
+     */
+    @Override
+    public void setSpecular(Color specular) {
+        this.specular = specular;
+    }
+
+    /**
+     * Changes the shininess.
+     *
+     * @param shininess The new shininess.
+     */
+    @Override
+    public void setShininess(int shininess) {
+        this.shininess = shininess;
+    }
 }

@@ -1,7 +1,9 @@
 package fr.univartois.iutl.info.raytracing.parser.figure;
 
+import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
+import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Sphere} class represents a sphere.
@@ -17,7 +19,18 @@ public class Sphere implements IFigure {
     protected double radius;
     
     private Point o;
-    
+    /**
+     * The diffuse color of the figure
+     */
+    private Color diffuse;
+    /**
+     * The reflected light
+     */
+    private Color specular;
+    /**
+     * The shininess
+     */
+    int shininess;
     /**
 	 * @return the o
 	 */
@@ -40,6 +53,9 @@ public class Sphere implements IFigure {
     public Sphere(Point center, double radius) {
         this.center = center;
         this.radius = radius;
+        this.diffuse = null;
+        this.specular = null;
+        this.shininess = -1;
     }
 
     /**
@@ -105,5 +121,64 @@ public class Sphere implements IFigure {
     		}
     		return -1;
     	}
+
+    /**
+     * Gives the diffuse color of the figure.
+     *
+     * @return The diffuse color of the figure.
+     */
+    @Override
+    public Color getDiffuse() {
+        return diffuse;
+    }
+
+    /**
+     * Gives the reflected light.
+     *
+     * @return The reflected light.
+     */
+    @Override
+    public Color getSpecular() {
+        return specular;
+    }
+
+    /**
+     * Gives the shininess of the figure.
+     *
+     * @return The shininess of the figure.
+     */
+    @Override
+    public int getShininess() {
+        return shininess;
+    }
+
+    /**
+     * Changes the diffuse color.
+     *
+     * @param diffuse The new diffuse color.
+     */
+    @Override
+    public void setDiffuse(Color diffuse) {
+        this.diffuse = diffuse;
+    }
+
+    /**
+     * Changes the reflected light.
+     *
+     * @param specular The new reflected light.
+     */
+    @Override
+    public void setSpecular(Color specular) {
+        this.specular = specular;
+    }
+
+    /**
+     * Changes the shininess.
+     *
+     * @param shininess The new shininess.
+     */
+    @Override
+    public void setShininess(int shininess) {
+        this.shininess = shininess;
     }
 }
