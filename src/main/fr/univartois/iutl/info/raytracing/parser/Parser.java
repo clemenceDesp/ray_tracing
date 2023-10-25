@@ -119,7 +119,7 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void directional(String[] line) {
-        Point directional = new Point(new Triplets(new Coordinates(
+        Vector directional = new Vector(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3]))));
@@ -135,7 +135,7 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void point(String[] line) {
-        Point point = new Point(new Triplets(new Coordinates(
+        Vector point = new Vector(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3]))));
