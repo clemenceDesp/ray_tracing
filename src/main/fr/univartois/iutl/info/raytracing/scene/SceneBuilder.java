@@ -48,6 +48,13 @@ public interface SceneBuilder {
     void setAmbient(Color ambientLigth);
     void setAmbient(Color ambientLight);
 
+    /**
+     * Changes the sampling.
+     * @param sampling The new sampling.
+     * @param numberSampling The number of samples or the size of one side of the grid.
+     */
+    void setSampling(String sampling, int numberSampling);
+
     /***
      * Build the scene
      * @return the scene

@@ -134,6 +134,18 @@ public class ConcreteSceneBuilder implements SceneBuilder {
         this.ambientLight = ambientLight;
     }
 
+    /**
+     * Changes the sampling.
+     *
+     * @param sampling The new sampling.
+     * @param numberSampling The number of samples or the size of one side of the grid.
+     */
+    @Override
+    public void setSampling(String sampling, int numberSampling) {
+        this.sampling = sampling;
+        this.numberSampling = numberSampling;
+    }
+
     /***
      * Build the scene
      * @return the scene
