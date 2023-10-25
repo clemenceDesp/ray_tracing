@@ -41,9 +41,14 @@ public class RayTracing {
 				double b = (realheight/2)-(j+0.5)*pixelheight;
 				Vector v4 = (u.multiplication(a)).addition(v.multiplication(b)).substraction(w);
 				Vector d = v4.normalization();
+				double t = -2;
 				for (IFigure figure :scene.getFigures()) {
 					((Sphere) figure).setO(scene.getCamera().getLookFrom());
-					double t = figure.findInteraction(d);
+					double tTemp = figure.findInteraction(d);
+					if (t == -2 || (tTemp > t && tTemp >= 0)) {
+						t = tTemp;
+					}
+				}
 					if (t>=0) {
 						Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
 						scene.getImage().setRGB(i,j,color.getRGB());
@@ -52,7 +57,7 @@ public class RayTracing {
 						Color color = new Color(0,0,0);						
 						scene.getImage().setRGB(j,i,color.getRGB());
 					}
-				}
+
 			}
 		}
 		
