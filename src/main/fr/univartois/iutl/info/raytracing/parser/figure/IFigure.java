@@ -18,7 +18,7 @@ public interface IFigure {
      */
     Point getOrigin();
     
-    double findInteraction(Vector d);
+    double findInteraction(Point lookFrom, Vector d);
 
     /**
      * Gives the diffuse color of the figure.

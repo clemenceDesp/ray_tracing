@@ -87,7 +87,7 @@ public class Triangle implements IFigure {
         return pointA;
     }
     
-    public double findInteraction(Vector d) {
+    public double findInteraction(Point lookFrom, Vector d) {
     	throw new UnsupportedOperationException("This function only works with a sphere for now");
     }
 
