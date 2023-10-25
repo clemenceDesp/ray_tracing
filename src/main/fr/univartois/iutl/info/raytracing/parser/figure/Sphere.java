@@ -88,7 +88,7 @@ public class Sphere implements IFigure {
     
     public double findInteraction(Vector d) {
         double b = getO().substraction(getCenter()).multiplication(2).scalarProduct(d);
-        double c = getO().substraction(getCenter()).scalarProduct(getO().substraction(getCenter()));
+        double c = getO().substraction(getCenter()).scalarProduct(getO().substraction(getCenter())) - getRadius() * getRadius();
         double delta = b * b - 4 * 1 * c;
         if (delta < 0) {
             return -1;
