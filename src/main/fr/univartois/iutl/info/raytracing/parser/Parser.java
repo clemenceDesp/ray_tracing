@@ -190,7 +190,7 @@ public class Parser {
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3])))),
-                Integer.parseInt(line[4]));
+                Double.parseDouble(line[4]));
         particularities(line, sphere);
         sceneBuilder.addFigures(sphere);
     }
