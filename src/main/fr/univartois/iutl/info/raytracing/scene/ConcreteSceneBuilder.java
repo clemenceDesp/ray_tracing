@@ -46,6 +46,15 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     private Color ambientLight;
 
+    /***
+     * The sampling of the scene
+     */
+    private String sampling;
+
+    /***
+     * The number of samples or the size of one side of the grid.
+     */
+    private int numberSampling;
 
     /***
      * Create a new scene builder
@@ -58,6 +67,8 @@ public class ConcreteSceneBuilder implements SceneBuilder {
         this.width = 0;
         this.output = "output.png";
         this.ambientLight = new Color(new Triplets(new Coordinates(0, 0, 0)));
+        this.sampling = "middle";
+        this.numberSampling = 1;
     }
 
     /***
@@ -121,6 +132,18 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     @Override
     public void setAmbient(Color ambientLight) {
         this.ambientLight = ambientLight;
+    }
+
+    /**
+     * Changes the sampling.
+     *
+     * @param sampling The new sampling.
+     * @param numberSampling The number of samples or the size of one side of the grid.
+     */
+    @Override
+    public void setSampling(String sampling, int numberSampling) {
+        this.sampling = sampling;
+        this.numberSampling = numberSampling;
     }
 
     /***
