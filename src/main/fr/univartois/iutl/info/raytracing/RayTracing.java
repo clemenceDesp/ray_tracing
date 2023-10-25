@@ -20,13 +20,16 @@ public class RayTracing {
 		Vector v3 = w.vectorProduct(u);
 		Vector v = v3.normalization();
 		double fovr = (scene.getCamera().getFov()*Math.PI)/180;
-		double pixelheight = Math.tan(fovr/2);
-		double pixelwidth = (pixelheight*(scene.getWidth()/scene.getHeight()));
+		
+		double realheight = 2*Math.tan(fovr/2);
+		double pixelheight = realheight/scene.getHeight();
+		double realwidth = scene.getWidth()*pixelheight;
+		double pixelwidth = realwidth/scene.getWidth();
 		
 		for (int i=0;i<scene.getHeight();i++) {
 			for (int j=0;j<scene.getWidth();j++) {
-				double a = -(scene.getWidth()/2)+(i+0.5)*pixelwidth;
-				double b = (scene.getHeight()/2)-(j+0.5)*pixelheight;
+				double a = -(realwidth/2)+(i+0.5)*pixelwidth;
+				double b = (realheight/2)-(j+0.5)*pixelheight;
 				Vector v4 = (u.multiplication(a)).addition(v.multiplication(b)).substraction(w);
 				Vector d = v4.normalization();
 				for (IFigure figure :scene.getFigures()) {
