@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -41,14 +43,23 @@ public class RayTracing {
 				double b = (realheight/2)-(j+0.5)*pixelheight;
 				Vector v4 = (u.multiplication(a)).addition(v.multiplication(b)).substraction(w);
 				Vector d = v4.normalization();
-				double t = -2;
+				double t = -1;
+				List<Double> tList = new ArrayList<>();
 				for (IFigure figure :scene.getFigures()) {
 					((Sphere) figure).setO(scene.getCamera().getLookFrom());
 					double tTemp = figure.findInteraction(d);
-					if (t == -2 || (tTemp > t && tTemp >= 0)) {
-						t = tTemp;
+					if (tTemp >= 0) {
+						tList.add(tTemp);
 					}
 				}
+					if (!tList.isEmpty()) {
+						t = tList.get(0);
+						for (int k = 1; k < tList.size(); k++) {
+							if (tList.get(k) < t) {
+								t = tList.get(k);
+							}
+						}
+					}
 					if (t>=0) {
 						Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
 						scene.getImage().setRGB(i,j,color.getRGB());
