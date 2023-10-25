@@ -39,8 +39,8 @@ public class RayTracing {
 		
 		for (int i=0;i<scene.getHeight();i++) {
 			for (int j=0;j<scene.getWidth();j++) {
-				double a = -(realwidth/2)+(i+0.5)*pixelwidth;
-				double b = (realheight/2)-(j+0.5)*pixelheight;
+				double a = -(realwidth/2)+(j+0.5)*pixelwidth;
+				double b = (realheight/2)-(i+0.5)*pixelheight;
 				Vector v4 = (u.multiplication(a)).addition(v.multiplication(b)).substraction(w);
 				Vector d = v4.normalization();
 				double t = -1;
@@ -62,7 +62,7 @@ public class RayTracing {
 					}
 					if (t>=0) {
 						Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
-						scene.getImage().setRGB(i,j,color.getRGB());
+						scene.getImage().setRGB(j,i,color.getRGB());
 					}
 					else {
 						Color color = new Color(0,0,0);						
