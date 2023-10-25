@@ -33,7 +33,7 @@ public class DirectionalLight implements Light{
 	}
 
 	/**
-	 * @param coordinates
+	 * @param coordinates The new coordinates.
 	 * set the coordinates
 	 */
 	public void setCoordinates(Point coordinates) {
@@ -49,7 +49,7 @@ public class DirectionalLight implements Light{
 
 	/**
 	 * set the colors
-	 * @param colors
+	 * @param colors The new color.
 	 */
 	public void setColors(Color colors) {
 		this.colors=colors;

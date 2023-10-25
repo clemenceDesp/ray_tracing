@@ -14,7 +14,8 @@ public interface Light {
 	 */
 	Point getCoordinates();
 	/**
-	 * @param coordinates
+	 * @param coordinates The new coordinates.
+	 * set the coordinates
 	 */
 	void setCoordinates(Point coordinates);
 	
@@ -23,7 +24,7 @@ public interface Light {
 	 */
 	Color getColors();
 	/**
-	 * @param colors
+	 * @param colors The new color.
 	 */
 	void setColors(Color colors);
 }
