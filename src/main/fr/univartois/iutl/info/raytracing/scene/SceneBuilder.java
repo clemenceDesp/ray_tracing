@@ -45,7 +45,6 @@ public interface SceneBuilder {
      * Set the ambient light of the scene
      * @param ambientLight the ambient light to set
      */
-    void setAmbient(Color ambientLigth);
     void setAmbient(Color ambientLight);
 
     /**
