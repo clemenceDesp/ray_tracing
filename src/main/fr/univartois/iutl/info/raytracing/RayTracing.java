@@ -12,7 +12,15 @@ import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
+/**
+ * @author felix
+ *
+ */
 public class RayTracing {
+	/**
+	 * @param scene
+	 * This code is use to go through every pixel of the image and verify if this pixel is in a figure. If it is, the program colors it in the ambiant color, else the program colors it in black.
+	 */
 	public RayTracing(Scene scene) {
 		Vector v1 = scene.getCamera().getLookFrom().substraction(scene.getCamera().getLookAt());
 		Vector w = v1.normalization();
@@ -20,8 +28,8 @@ public class RayTracing {
 		Vector u = v2.normalization();
 		Vector v3 = w.vectorProduct(u);
 		Vector v = v3.normalization();
-		double fovr = (scene.getCamera().getFov()*Math.PI)/180;
 		
+		double fovr = (scene.getCamera().getFov()*Math.PI)/180;
 		double realheight = 2*Math.tan(fovr/2);
 		double pixelheight = realheight/scene.getHeight();
 		double realwidth = scene.getWidth()*pixelheight;
@@ -56,7 +64,7 @@ public class RayTracing {
 		}
 			
 		catch (IOException e) {
-			// ...
+			e.printStackTrace();
 		}
 	}
 }
