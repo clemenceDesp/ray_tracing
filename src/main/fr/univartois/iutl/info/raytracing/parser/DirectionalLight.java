@@ -2,6 +2,7 @@ package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Vector;
 
 /**
  * @author felix
@@ -9,10 +10,15 @@ import fr.univartois.iutl.info.raytracing.numeric.Point;
  */
 public class DirectionalLight implements Light{
 
-	public DirectionalLight(Point coordinates, Color colors) {
+	/**
+	 * the vector of the direction of the light
+	 */
+	private Vector vector;
+
+	public DirectionalLight(Color colors, Vector vector) {
 		super();
-		this.coordinates = coordinates;
 		this.colors = colors;
+		this.vector = vector;
 	}
 
 	/**
@@ -54,4 +60,29 @@ public class DirectionalLight implements Light{
 	public void setColors(Color colors) {
 		this.colors=colors;
 	}
+
+	/**
+	 * @return
+	 * return the point
+	 */
+	public Vector getVector() {
+		return vector;
+	}
+
+	/**
+	 * @param point
+	 * set the point
+	 */
+	public void setVector(Vector vector) {
+		this.vector = vector;
+	}
+	
+	/**
+	 * @return
+	 * return the direction of the vector of the light
+	 */
+	public Vector getDirection() {
+		return (this.vector).normalization();
+	}
+	
 }
