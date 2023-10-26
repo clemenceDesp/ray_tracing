@@ -3,6 +3,7 @@ package fr.univartois.iutl.info.raytracing.scene;
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.raytracing.RayTracingMiddle;
 
 import java.awt.image.BufferedImage;
 
@@ -136,5 +137,8 @@ public class Scene {
      */
     public Color getAmbientLigth() {
         return ambientLigth;
+    }
+    public void saveImage() {
+        new RayTracingMiddle(this);
     }
 }
