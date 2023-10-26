@@ -46,8 +46,7 @@ public class RayTracing {
 				double t = -1;
 				List<Double> tList = new ArrayList<>();
 				for (IFigure figure :scene.getFigures()) {
-					((Sphere) figure).setO(scene.getCamera().getLookFrom());
-					double tTemp = figure.findInteraction(d);
+					double tTemp = figure.findInteraction(scene.getCamera().getLookFrom(), d);
 					if (tTemp >= 0) {
 						tList.add(tTemp);
 					}

@@ -62,8 +62,12 @@ public class Plane implements IFigure {
         return normal;
     }
     
-    public double findInteraction(Vector d) {
-    	throw new UnsupportedOperationException("This function only works with a sphere for now");
+    public double findInteraction(Point lookFrom, Vector d) {
+    	double y = d.scalarProduct(this.getNormal());
+        if (y==0) {
+            return -1;
+        }
+        return ((this.getOrigin().substraction(lookFrom)).scalarProduct(this.getNormal()))/y;
     }
 
 
