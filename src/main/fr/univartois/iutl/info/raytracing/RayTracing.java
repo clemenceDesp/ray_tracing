@@ -51,16 +51,27 @@ public class RayTracing {
 				double t = -1;
 				boolean bool = false;
 				IFigure stockFigure = null;
-				List<Double> tList = new ArrayList<>();
 				for (IFigure figure :scene.getFigures()) {
 					((Sphere) figure).setO(scene.getCamera().getLookFrom());
+
 					double tTemp = figure.findInteraction(d);
-					if (tTemp >= 0) {
-						tList.add(tTemp);
+					if (tTemp >= 0 && t < 0) {
+						if (figure.getDiffuse() != null) {
+							if (figure.getDiffuse().getTriplets() != null) {
+								stockFigure = figure;
+								bool = true;
+							}
+						}
+						t = tTemp;
 					}
-					if (figure.getDiffuse() != null) {
-						stockFigure = figure;
-						bool = true;
+					else if (tTemp >= 0 && t > tTemp) {
+						if (figure.getDiffuse() != null) {
+							if (figure.getDiffuse().getTriplets() != null) {
+								stockFigure = figure;
+								bool = true;
+							}
+						}
+						t = tTemp;
 					}
 				}
 				/*for (IFigure figure :scene.getFigures()) {
@@ -70,28 +81,23 @@ public class RayTracing {
 						tmp=tTemp;
 					}
 				}*/
-				if (!tList.isEmpty()) {
-					t = tList.get(0);
-					for (int k = 1; k < tList.size(); k++) {
-						if (tList.get(k) < t) {
-							t = tList.get(k);
-						}
-					}
-				}
 				if (t>=0) {
 					if (bool) {
 						calcul = new LambertDecorator(new BaseColor());
-						fr.univartois.iutl.info.raytracing.numeric.Color color = calcul.calculatorColor(scene, t, d, stockFigure, stockFigure.getDiffuse());
+						fr.univartois.iutl.info.raytracing.numeric.Color color1 = calcul.calculatorColor(scene, t, d, stockFigure, stockFigure.getDiffuse());
+						Color color = new Color((float)color1.getTriplets().getPointA().getX(),(float)color1.getTriplets().getPointA().getY(),(float)color1.getTriplets().getPointA().getZ());
+						scene.getImage().setRGB(j,i,color.getRGB());
 					}
 					else {
 						calcul = new BaseColor();
-						fr.univartois.iutl.info.raytracing.numeric.Color color = calcul.calculatorColor(scene, t, d, stockFigure, null);
+						fr.univartois.iutl.info.raytracing.numeric.Color color1 = calcul.calculatorColor(scene, t, d, stockFigure, null);
+						Color color = new Color((float)color1.getTriplets().getPointA().getX(),(float)color1.getTriplets().getPointA().getY(),(float)color1.getTriplets().getPointA().getZ());
+						scene.getImage().setRGB(j,i,color.getRGB());
 					}
-					/*Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
-					scene.getImage().setRGB(j,i,color.getRGB());*/
+
 				}
 				else {
-					Color color = new Color(0,0,0);						
+					Color color = new Color(0,0,0);
 					scene.getImage().setRGB(j,i,color.getRGB());
 				}
 			}
