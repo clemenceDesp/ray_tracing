@@ -1,4 +1,4 @@
-package fr.univartois.iutl.info.raytracing.rayTracing;
+package fr.univartois.iutl.info.raytracing.raytracing;
 
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
@@ -29,15 +29,17 @@ public abstract class AbstractRayTracing {
                 Vector d = v4.normalization();
 
                 Color color = new Color(0,0,0);
-                List<Color> listColor = getPixelsSample();
+                List<Color> listColor = getPixelsSample(i, j, scene, d);
                 for (Color colorl : listColor) {
                     color = new Color(color.getRed() + colorl.getRed(), color.getGreen() + colorl.getGreen(), color.getBlue() + colorl.getBlue());
                 }
-                color = new Color(color.getRed()/listColor.size(), color.getGreen()/listColor.size(), color.getBlue()/listColor.size());
+                if (!listColor.isEmpty()) {
+                    color = new Color(color.getRed()/listColor.size(), color.getGreen()/listColor.size(), color.getBlue()/listColor.size());
+                }
                 scene.getImage().setRGB(j,i,color.getRGB());
             }
         }
     }
 
-    protected abstract List<Color> getPixelsSample();
+    protected abstract List<Color> getPixelsSample(int i ,int j, Scene scene, Vector d);
 }
