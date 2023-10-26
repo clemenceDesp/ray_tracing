@@ -150,6 +150,27 @@ public class Scene {
         return ambientLigth;
     }
     public void saveImage() {
-        new RayTracingMiddle(this);
+        IRayTracing rayTracing = new RayTracing(this);
+        new AntialiasingGrid(rayTracing);
+        save();
+    }
+
+    private void save() {
+        try {
+            File outputfile = new File(output);
+            ImageIO.write(image, "png", outputfile);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getSampling() {
+        return sampling;
+    }
+
+    public int getNumberSampling() {
+        return numberSampling;
     }
 }
