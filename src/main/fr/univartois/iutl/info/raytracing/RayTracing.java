@@ -10,6 +10,9 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
+import fr.univartois.iutl.info.raytracing.parser.BaseColor;
+import fr.univartois.iutl.info.raytracing.parser.Calculator;
+import fr.univartois.iutl.info.raytracing.parser.LambertDecorator;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
@@ -36,6 +39,8 @@ public class RayTracing {
 		double pixelheight = realheight/scene.getHeight();
 		double realwidth = scene.getWidth()*pixelheight;
 		double pixelwidth = realwidth/scene.getWidth();
+		double tmp;
+		Calculator calcul;
 		
 		for (int i=0;i<scene.getHeight();i++) {
 			for (int j=0;j<scene.getWidth();j++) {
@@ -44,6 +49,8 @@ public class RayTracing {
 				Vector v4 = (u.multiplication(a)).addition(v.multiplication(b)).substraction(w);
 				Vector d = v4.normalization();
 				double t = -1;
+				boolean bool = false;
+				IFigure stockFigure = null;
 				List<Double> tList = new ArrayList<>();
 				for (IFigure figure :scene.getFigures()) {
 					((Sphere) figure).setO(scene.getCamera().getLookFrom());
@@ -51,24 +58,42 @@ public class RayTracing {
 					if (tTemp >= 0) {
 						tList.add(tTemp);
 					}
+					if (figure.getDiffuse() != null) {
+						stockFigure = figure;
+						bool = true;
+					}
 				}
-					if (!tList.isEmpty()) {
-						t = tList.get(0);
-						for (int k = 1; k < tList.size(); k++) {
-							if (tList.get(k) < t) {
-								t = tList.get(k);
-							}
+				/*for (IFigure figure :scene.getFigures()) {
+					((Sphere) figure).setO(scene.getCamera().getLookFrom());
+					double tTemp = figure.findInteraction(d);
+					if (tTemp >= 0 && tTemp < tmp) {
+						tmp=tTemp;
+					}
+				}*/
+				if (!tList.isEmpty()) {
+					t = tList.get(0);
+					for (int k = 1; k < tList.size(); k++) {
+						if (tList.get(k) < t) {
+							t = tList.get(k);
 						}
 					}
-					if (t>=0) {
-						Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
-						scene.getImage().setRGB(j,i,color.getRGB());
+				}
+				if (t>=0) {
+					if (bool) {
+						calcul = new LambertDecorator(new BaseColor());
+						fr.univartois.iutl.info.raytracing.numeric.Color color = calcul.calculatorColor(scene, t, d, stockFigure, stockFigure.getDiffuse());
 					}
 					else {
-						Color color = new Color(0,0,0);						
-						scene.getImage().setRGB(j,i,color.getRGB());
+						calcul = new BaseColor();
+						fr.univartois.iutl.info.raytracing.numeric.Color color = calcul.calculatorColor(scene, t, d, stockFigure, null);
 					}
-
+					/*Color color = new Color((float)scene.getAmbientLigth().getTriplets().getPointA().getX(),(float)scene.getAmbientLigth().getTriplets().getPointA().getY(),(float)scene.getAmbientLigth().getTriplets().getPointA().getZ());
+					scene.getImage().setRGB(j,i,color.getRGB());*/
+				}
+				else {
+					Color color = new Color(0,0,0);						
+					scene.getImage().setRGB(j,i,color.getRGB());
+				}
 			}
 		}
 		
