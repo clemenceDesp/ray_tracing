@@ -1,6 +1,7 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
+import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 
 /**
@@ -8,11 +9,15 @@ import fr.univartois.iutl.info.raytracing.numeric.Vector;
  *
  */
 public class PunctualLight implements Light {
+	/**
+	 * the point of the direction of the light
+	 */
+	private Point point;
 	
 	public PunctualLight(Vector coordinates, Color colors) {
 		super();
-		this.coordinates = coordinates;
 		this.colors = colors;
+		this.point = point;
 	}
 
 	/**
@@ -54,4 +59,30 @@ public class PunctualLight implements Light {
 	public void setColors(Color colors) {
 		this.colors=colors;
 	}
+	
+	/**
+	 * @return
+	 * return the point
+	 */
+	public Point getPoint() {
+		return point;
+	}
+
+	/**
+	 * @param point
+	 * set the point
+	 */
+	public void setPoint(Point point) {
+		this.point = point;
+	}
+	
+	/**
+	 * @return
+	 * return the direction of the vector of the light
+	 */
+	public Vector getDirection() {
+		Vector v = this.point.substraction(this.point);
+		return v.normalization();
+	}
+	
 }
