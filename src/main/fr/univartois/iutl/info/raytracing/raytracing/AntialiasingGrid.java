@@ -10,13 +10,13 @@ public class AntialiasingGrid extends AbstractRayTracing{
         super(rayTracing);
         this.image = getScene().getImage();
         gridAntialiasingMethod();
+        getScene().setImage(imageCopy);
     }
 
     private void gridAntialiasingMethod() {
-
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
-                image.setRGB(x, y, getSmoothPixel(x, y).getRGB());
+                imageCopy.setRGB(x, y, getSmoothPixel(x, y).getRGB());
             }
         }
     }
