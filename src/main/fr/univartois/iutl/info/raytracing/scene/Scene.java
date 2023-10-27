@@ -160,7 +160,10 @@ public class Scene {
     }
     public void saveImage() {
         IRayTracing rayTracing = new RayTracing(this);
-        new AntialiasingRandom(rayTracing);
+        if (sampling.equals("grid"))
+            new AntialiasingGrid(rayTracing);
+        else if (sampling.equals("random"))
+            new AntialiasingRandom(rayTracing);
         save();
     }
 
