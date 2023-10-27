@@ -152,6 +152,6 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight);
+        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight, sampling, numberSampling);
     }
 }
