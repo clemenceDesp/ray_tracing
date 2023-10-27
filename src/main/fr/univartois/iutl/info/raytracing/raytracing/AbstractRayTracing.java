@@ -2,10 +2,14 @@ package fr.univartois.iutl.info.raytracing.raytracing;
 
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
+import java.awt.image.BufferedImage;
+
 public abstract class AbstractRayTracing implements IRayTracing {
-    IRayTracing rayTracing;
+    protected IRayTracing rayTracing;
+    protected BufferedImage imageCopy;
     protected AbstractRayTracing(IRayTracing rayTracing) {
         this.rayTracing = rayTracing;
+        imageCopy = new BufferedImage(getScene().getWidth(), getScene().getHeight(), BufferedImage.TYPE_INT_RGB);
     }
 
     /***
