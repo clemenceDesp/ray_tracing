@@ -52,9 +52,8 @@ public class RayTracing {
 				boolean bool = false;
 				IFigure stockFigure = null;
 				for (IFigure figure :scene.getFigures()) {
-					((Sphere) figure).setO(scene.getCamera().getLookFrom());
 
-					double tTemp = figure.findInteraction(d);
+					double tTemp = figure.findInteraction(scene.getCamera().getLookFrom(), d);
 					if (tTemp >= 0 && t < 0) {
 						if (figure.getDiffuse() != null) {
 							if (figure.getDiffuse().getTriplets() != null) {

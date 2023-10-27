@@ -135,7 +135,7 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void point(String[] line) {
-        Point point = new Point(new Triplets(new Coordinates(
+        Vector point = new Vector(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3]))));
@@ -235,6 +235,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Changes the sampling of the scene
+     * @param line Line that is being read.
+     */
+    private static void sampling(String[] line) {
+        sceneBuilder.setSampling(line[1], Integer.parseInt(line[2]));
+    }
+
     public static Scene read(String fileName) {
         BufferedReader bufferedreader = null;
         FileReader filereader = null;
@@ -289,6 +297,8 @@ public class Parser {
                     case "plane":
                         plane(line);
                         break;
+                    case "sampling":
+                        sampling(line);
                 }
             }
             return sceneBuilder.build();
