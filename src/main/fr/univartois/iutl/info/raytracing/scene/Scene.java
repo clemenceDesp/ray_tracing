@@ -4,6 +4,7 @@ import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingGrid;
+import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingRandom;
 import fr.univartois.iutl.info.raytracing.raytracing.IRayTracing;
 import fr.univartois.iutl.info.raytracing.raytracing.RayTracing;
 
@@ -42,7 +43,7 @@ public class Scene {
     /***
      * The image of the scene
      */
-    private final BufferedImage image;
+    private BufferedImage image;
 
     /***
      * The output of the scene
@@ -135,6 +136,14 @@ public class Scene {
     }
 
     /***
+     * Set the image of this scene
+     * @param image the image of this scene
+     */
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    /***
      * Gives the output of this scene
      * @return the output of this scene
      */
@@ -151,7 +160,7 @@ public class Scene {
     }
     public void saveImage() {
         IRayTracing rayTracing = new RayTracing(this);
-        new AntialiasingGrid(rayTracing);
+        new AntialiasingRandom(rayTracing);
         save();
     }
 
