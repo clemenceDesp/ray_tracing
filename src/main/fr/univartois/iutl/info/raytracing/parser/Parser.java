@@ -143,7 +143,7 @@ public class Parser {
                 Double.parseDouble(line[4]),
                 Double.parseDouble(line[5]),
                 Double.parseDouble(line[6]))));
-        sceneBuilder.addLight(new PunctualLight(color, point));
+        sceneBuilder.addLight(new PunctualLight(point, color));
     }
 
     /**
