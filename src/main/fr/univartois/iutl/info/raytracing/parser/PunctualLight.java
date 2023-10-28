@@ -14,7 +14,7 @@ public class PunctualLight implements Light {
 	 */
 	private Point point;
 	
-	public PunctualLight(Vector coordinates, Color colors) {
+	public PunctualLight(Point point, Color colors) {
 		super();
 		this.colors = colors;
 		this.point = point;
