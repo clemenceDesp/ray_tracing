@@ -31,7 +31,6 @@ public class LambertDecorator implements Calculator{
 			double max= 0;
 			Vector l;
 			if (light instanceof PunctualLight pl) {
-				System.out.println(pl);
 				l = pl.getPoint().substraction(p);
 			} else {
 				l = ((DirectionalLight) light).getVector();
