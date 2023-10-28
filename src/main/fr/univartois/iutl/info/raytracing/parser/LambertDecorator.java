@@ -29,8 +29,19 @@ public class LambertDecorator implements Calculator{
 		for(Light light:scene.getLight()) {
 			Color c = light.getColors();
 			double max= 0;
-			if (n.scalarProduct(((DirectionalLight) light).getVector()) > 0) {
-				max = n.scalarProduct(((DirectionalLight) light).getVector());
+			Vector l;
+			if (light instanceof PunctualLight pl) {
+				System.out.println(pl);
+				l = pl.getPoint().substraction(p);
+			} else {
+				l = ((DirectionalLight) light).getVector();
+			}
+			l = l.normalization();
+			if (n.scalarProduct(l) > 0) {
+				max = n.scalarProduct(l);
+			}
+			if (max > 1) {
+				max = 1;
 			}
 			color = color.addition(c.multiplication(max));
 		}
