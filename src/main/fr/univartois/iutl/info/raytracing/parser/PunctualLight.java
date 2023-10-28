@@ -2,23 +2,28 @@ package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Vector;
 
 /**
  * @author felix
  *
  */
 public class PunctualLight implements Light {
+	/**
+	 * the point of the direction of the light
+	 */
+	private Point point;
 	
-	public PunctualLight(Point coordinates, Color colors) {
+	public PunctualLight(Point point, Color colors) {
 		super();
-		this.coordinates = coordinates;
 		this.colors = colors;
+		this.point = point;
 	}
 
 	/**
 	 * the coordinates of the light
 	 */
-	private Point coordinates; 
+	private Vector coordinates;
 	
 	/**
 	 * the colors of the light
@@ -28,15 +33,15 @@ public class PunctualLight implements Light {
 	/**
 	 * @return the coordinates
 	 */
-	public Point getCoordinates() {
+	public Vector getCoordinates() {
 		return this.coordinates;
 	}
 
 	/**
-	 * @param coordinates
+	 * @param coordinates The new coordinates.
 	 * set the coordinates
 	 */
-	public void setCoordinates(Point coordinates) {
+	public void setCoordinates(Vector coordinates) {
 		this.coordinates=coordinates;
 	}
 
@@ -49,9 +54,35 @@ public class PunctualLight implements Light {
 
 	/**
 	 * set the colors
-	 * @param colors
+	 * @param colors The new color.
 	 */
 	public void setColors(Color colors) {
 		this.colors=colors;
 	}
+	
+	/**
+	 * @return
+	 * return the point
+	 */
+	public Point getPoint() {
+		return point;
+	}
+
+	/**
+	 * @param point
+	 * set the point
+	 */
+	public void setPoint(Point point) {
+		this.point = point;
+	}
+	
+	/**
+	 * @return
+	 * return the direction of the vector of the light
+	 */
+	public Vector getDirection() {
+		Vector v = this.point.substraction(this.point);
+		return v.normalization();
+	}
+	
 }

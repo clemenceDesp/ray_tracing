@@ -8,8 +8,6 @@ import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
-import fr.univartois.iutl.info.raytracing.parser.PunctualLight;
-import fr.univartois.iutl.info.raytracing.parser.DirectionalLight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -119,7 +117,7 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void directional(String[] line) {
-        Point directional = new Point(new Triplets(new Coordinates(
+        Vector directional = new Vector(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3]))));
@@ -127,7 +125,7 @@ public class Parser {
                 Double.parseDouble(line[4]),
                 Double.parseDouble(line[5]),
                 Double.parseDouble(line[6]))));
-        sceneBuilder.addLight(new DirectionalLight(directional, color));
+        sceneBuilder.addLight(new DirectionalLight(color, directional));
     }
 
     /**
@@ -220,19 +218,27 @@ public class Parser {
     private static void particularities(String[] line, IFigure figure) {
         if (stockDiffuse != null) {
             figure.setDiffuse(new Color(new Triplets(new Coordinates(
-                    Double.parseDouble(line[1]),
-                    Double.parseDouble(line[2]),
-                    Double.parseDouble(line[3])))));
+                    Double.parseDouble(stockDiffuse[1]),
+                    Double.parseDouble(stockDiffuse[2]),
+                    Double.parseDouble(stockDiffuse[3])))));
         }
         if (stockSpecular != null) {
             figure.setSpecular(new Color(new Triplets(new Coordinates(
-                    Double.parseDouble(line[1]),
-                    Double.parseDouble(line[2]),
-                    Double.parseDouble(line[3])))));
+                    Double.parseDouble(stockSpecular[1]),
+                    Double.parseDouble(stockSpecular[2]),
+                    Double.parseDouble(stockSpecular[3])))));
         }
         if (stockShininess != null) {
-            figure.setShininess(Integer.parseInt(line[1]));
+            figure.setShininess(Integer.parseInt(stockShininess[1]));
         }
+    }
+
+    /**
+     * Changes the sampling of the scene
+     * @param line Line that is being read.
+     */
+    private static void sampling(String[] line) {
+        sceneBuilder.setSampling(line[1], Integer.parseInt(line[2]));
     }
 
     public static Scene read(String fileName) {
@@ -289,6 +295,8 @@ public class Parser {
                     case "plane":
                         plane(line);
                         break;
+                    case "sampling":
+                        sampling(line);
                 }
             }
             return sceneBuilder.build();

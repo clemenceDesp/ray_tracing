@@ -17,8 +17,7 @@ public class Sphere implements IFigure {
      * The radius of the sphere
      */
     protected double radius;
-    
-    private Point o;
+
     /**
      * The diffuse color of the figure
      */
@@ -31,19 +30,6 @@ public class Sphere implements IFigure {
      * The shininess
      */
     int shininess;
-    /**
-	 * @return the o
-	 */
-	public Point getO() {
-		return o;
-	}
-
-	/**
-	 * @param o the o to set
-	 */
-	public void setO(Point o) {
-		this.o = o;
-	}
 
 	/**
      * Constructor of sphere.
@@ -86,20 +72,20 @@ public class Sphere implements IFigure {
         return center;
     }
     
-    public double findInteraction(Vector d) {
-        double b = getO().substraction(getCenter()).multiplication(2).scalarProduct(d);
-        double c = getO().substraction(getCenter()).scalarProduct(getO().substraction(getCenter())) - getRadius() * getRadius();
+    public double findInteraction(Point lookFrom, Vector d) {
+        double b = lookFrom.substraction(getCenter()).multiplication(2).scalarProduct(d);
+        double c = lookFrom.substraction(getCenter()).scalarProduct(lookFrom.substraction(getCenter())) - getRadius() * getRadius();
         double delta = b * b - 4 * 1 * c;
         if (delta < 0) {
             return -1;
         } else if (delta == 0) {
-            if ((-b) / (2 * 1) > 0) {
-                return (-b) / (2 * 1);
+            if ((-b) / 2 > 0) {
+                return (-b) / 2;
             }
             return -1;
         } else {
-            double t1 = (-b + Math.sqrt(delta)) / (2 * 1);
-            double t2 = (-b - Math.sqrt(delta)) / (2 * 1);
+            double t1 = (-b + Math.sqrt(delta)) / 2;
+            double t2 = (-b - Math.sqrt(delta)) / 2;
             if (t1 > t2) {
                 if (t2 > 0) {
                     return t2;
