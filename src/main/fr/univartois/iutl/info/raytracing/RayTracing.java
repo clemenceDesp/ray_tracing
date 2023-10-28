@@ -60,11 +60,13 @@ public class RayTracing{
                 double t = getMinT(d);
 
                 if (t >= 0) {
-                    Calculator calcul = new LambertDecorator(new BaseColor());
-                    fr.univartois.iutl.info.raytracing.numeric.Color color1 = calcul.calculatorColor(scene, t, d, stockFigure, stockFigure.getDiffuse());
-                    Color color = new Color((float)color1.getTriplets().getPointA().getX(),(float)color1.getTriplets().getPointA().getY(),(float)color1.getTriplets().getPointA().getZ());
-                    scene.getImage().setRGB(j,i,color.getRGB());
-                    stockFigure = null;
+                    if (stockFigure != null && stockFigure.getDiffuse() != null) {
+                        Calculator calcul = new LambertDecorator(new BaseColor());
+                        fr.univartois.iutl.info.raytracing.numeric.Color color1 = calcul.calculatorColor(scene, t, d, stockFigure, stockFigure.getDiffuse());
+                        Color color = new Color((float)color1.getTriplets().getPointA().getX(),(float)color1.getTriplets().getPointA().getY(),(float)color1.getTriplets().getPointA().getZ());
+                        scene.getImage().setRGB(j,i,color.getRGB());
+                        stockFigure = null;
+                    }
                 } else {
                     Color color = new Color(0, 0, 0);
                     scene.getImage().setRGB(j, i, color.getRGB());
