@@ -39,7 +39,7 @@ public class Point {
 	 * Does the addition between a point and a vector, this find a new point with those coordinates
 	 */
 	public Point addition(Vector pointB) {
-		return new Point (triplets.substraction(pointB.getTriplets().getPointA()));
+		return new Point (triplets.addition(pointB.getTriplets().getPointA()));
 	}
 	
 	/**
