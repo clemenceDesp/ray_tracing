@@ -17,9 +17,10 @@ public class CalculateChecked implements ICalculateMethod{
      * @return
      */
     public Color calculate(Point point, double taille, Scene scene, double t, Vector d, IFigure stockFigure, Color c1, Color c2) {
-        if (point.getTriplets().getPointA().getX() != taille && point.getTriplets().getPointA().getZ() != taille) {
-            return c1;
+        System.out.println(point.getTriplets().getPointA().getX()%(taille*2));
+        if (point.getTriplets().getPointA().getX()%(taille*2) < taille && point.getTriplets().getPointA().getZ()%(taille*2) <= taille || point.getTriplets().getPointA().getX()%(taille*2) > taille && point.getTriplets().getPointA().getZ()%(taille*2) > taille) {
+            return c2;
         }
-        return c2;
+        return c1;
     }
 }

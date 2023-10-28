@@ -7,11 +7,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import fr.univartois.iutl.info.raytracing.checkerboard.CalculateChecked;
+import fr.univartois.iutl.info.raytracing.checkerboard.CalculateFull;
+import fr.univartois.iutl.info.raytracing.checkerboard.ICalculateMethod;
+import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
+import fr.univartois.iutl.info.raytracing.numeric.Point;
+import fr.univartois.iutl.info.raytracing.numeric.Triplets;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 import fr.univartois.iutl.info.raytracing.parser.BaseColor;
 import fr.univartois.iutl.info.raytracing.parser.Calculator;
 import fr.univartois.iutl.info.raytracing.parser.LambertDecorator;
 import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.parser.figure.Plane;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 
@@ -46,9 +53,6 @@ public class RayTracing{
         calculateImage();
     }
 
-    /***
-     * Calculate pixels of the image
-     */
     public void calculateImage() {
         for (int i = 0; i < scene.getHeight(); i++) {
             for (int j = 0; j < scene.getWidth(); j++) {
@@ -60,6 +64,12 @@ public class RayTracing{
                 double t = getMinT(d);
 
                 if (t >= 0) {
+                    if (stockFigure instanceof fr.univartois.iutl.info.raytracing.parser.figure.Plane && ((Plane) stockFigure).isChecker()) {
+                                ICalculateMethod calculateMethod = new CalculateChecked();
+                                fr.univartois.iutl.info.raytracing.numeric.Color color1 = calculateMethod.calculate(new Point(new Triplets(new Coordinates(i, 0, j))), ((Plane) stockFigure).getlength(), scene, t, d, stockFigure, ((Plane) stockFigure).getC1(), ((Plane) stockFigure).getC2());
+                                Color color = new Color((float) color1.getTriplets().getPointA().getX(), (float) color1.getTriplets().getPointA().getY(), (float) color1.getTriplets().getPointA().getZ());
+                                scene.getImage().setRGB(j, i, color.getRGB());
+                    }
                     if (stockFigure != null && stockFigure.getDiffuse() != null) {
                         Calculator calcul = new LambertDecorator(new BaseColor());
                         fr.univartois.iutl.info.raytracing.numeric.Color color1 = calcul.calculatorColor(scene, t, d, stockFigure, stockFigure.getDiffuse());
@@ -73,18 +83,17 @@ public class RayTracing{
                 }
             }
         }
-		try {
-			// Retrieve image
-			BufferedImage image = scene.getImage();
-			File outputfile = new File(scene.getOutput());
-			ImageIO.write(image, "png", outputfile);
-		}
-			
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-    }
+        try {
+            // Retrieve image
+            BufferedImage image = scene.getImage();
+            File outputfile = new File(scene.getOutput());
+            ImageIO.write(image, "png", outputfile);
+        }
 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private double getMinT(Vector d) {
         double t = -1;
         for (IFigure figure : scene.getFigures()) {

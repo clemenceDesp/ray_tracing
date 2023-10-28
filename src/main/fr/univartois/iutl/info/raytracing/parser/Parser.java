@@ -14,6 +14,27 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Parser {
+
+    /**
+     * a boolean put to false, switching to true if the next plane needs to be checked
+     */
+    private static boolean checker = false;
+
+    /**
+     * The first color of the two which are used in the case of a checked plane
+     */
+    private static Color c1;
+
+    /**
+     * The second color of the two which are used in the case of a checked plane
+     */
+    private static Color c2;
+
+    /**
+     * the length of a checkerboard square
+     */
+    private static double length;
+
     /**
      * Array that stores the points created using maxverts and vertex.
      */
@@ -198,16 +219,52 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void plane(String[] line) {
-        Plane plane = new Plane(new Point(new Triplets(new Coordinates(
-                Double.parseDouble(line[1]),
-                Double.parseDouble(line[2]),
-                Double.parseDouble(line[3])))),
-                new Vector(new Triplets(new Coordinates(
-                        Double.parseDouble(line[4]),
-                        Double.parseDouble(line[5]),
-                        Double.parseDouble(line[6])))));
+        Plane plane;
+        System.out.println(checker);
+        if (!checker) {
+            plane = new Plane(new Point(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3])))),
+                    new Vector(new Triplets(new Coordinates(
+                            Double.parseDouble(line[4]),
+                            Double.parseDouble(line[5]),
+                            Double.parseDouble(line[6])))));
+        }
+        else {
+            plane = new Plane(new Point(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3])))),
+                    new Vector(new Triplets(new Coordinates(
+                            Double.parseDouble(line[4]),
+                            Double.parseDouble(line[5]),
+                            Double.parseDouble(line[6])))),
+                    c1, c2,length);
+        }
+
         particularities(line, plane);
         sceneBuilder.addFigures(plane);
+        if (checker) {
+            checker = false;
+        }
+    }
+
+    /**
+     * it creates the two colors for the checked plane
+     * @param line
+     */
+    private static void checker(String[] line) {
+        c1 = new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[1]),
+                Double.parseDouble(line[2]),
+                Double.parseDouble(line[3]))));
+        c2 = new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        length = Double.parseDouble(line[7]);
+        checker = true;
     }
 
     /**
@@ -297,6 +354,10 @@ public class Parser {
                         break;
                     case "sampling":
                         sampling(line);
+                    case "checker":
+                        checker = true;
+                        checker(line);
+                        break;
                 }
             }
             return sceneBuilder.build();
