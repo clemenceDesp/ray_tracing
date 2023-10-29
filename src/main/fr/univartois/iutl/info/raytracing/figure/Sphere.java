@@ -1,4 +1,4 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;

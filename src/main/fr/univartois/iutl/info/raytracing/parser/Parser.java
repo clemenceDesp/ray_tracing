@@ -1,10 +1,10 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.*;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
-import fr.univartois.iutl.info.raytracing.parser.figure.Plane;
-import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
-import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.Plane;
+import fr.univartois.iutl.info.raytracing.figure.Sphere;
+import fr.univartois.iutl.info.raytracing.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
