@@ -78,38 +78,6 @@ public class Plane implements IFigure {
     }
 
     /**
-     * check if the plane is checked or not
-     * @return checker
-     */
-    public boolean isChecker() {
-        return checker;
-    }
-
-    /**
-     *
-     * @return length
-     */
-    public double getLength() {
-        return length;
-    }
-
-    /**
-     *
-     * @return color
-     */
-    public Color getC1() {
-        return c1;
-    }
-
-    /**
-     *
-     * @return color
-     */
-    public Color getC2() {
-        return c2;
-    }
-
-    /**
      * Gives the point of origin of this figure.
      *
      * @return The point of origin of this figure.
