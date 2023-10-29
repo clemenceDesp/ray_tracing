@@ -66,7 +66,7 @@ public class RayTracing{
                 if (t >= 0) {
                     if (stockFigure instanceof fr.univartois.iutl.info.raytracing.parser.figure.Plane && ((Plane) stockFigure).isChecker()) {
                                 ICalculateMethod calculateMethod = new CalculateChecked();
-                                fr.univartois.iutl.info.raytracing.numeric.Color color1 = calculateMethod.calculate(new Point(new Triplets(new Coordinates(i, 0, j))), ((Plane) stockFigure).getlength(), scene, t, d, stockFigure, ((Plane) stockFigure).getC1(), ((Plane) stockFigure).getC2());
+                                fr.univartois.iutl.info.raytracing.numeric.Color color1 = calculateMethod.calculate(new Point(new Triplets(new Coordinates(i, 0, j))), ((Plane) stockFigure).getLength(), scene, t, d, stockFigure, ((Plane) stockFigure).getC1(), ((Plane) stockFigure).getC2());
                                 Color color = new Color((float) color1.getTriplets().getPointA().getX(), (float) color1.getTriplets().getPointA().getY(), (float) color1.getTriplets().getPointA().getZ());
                                 scene.getImage().setRGB(j, i, color.getRGB());
                     }

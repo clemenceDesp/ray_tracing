@@ -89,7 +89,7 @@ public class Plane implements IFigure {
      *
      * @return length
      */
-    public double getlength() {
+    public double getLength() {
         return length;
     }
 
