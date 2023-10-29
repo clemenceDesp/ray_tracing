@@ -1,7 +1,7 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
-import fr.univartois.iutl.info.raytracing.parser.Light;
+import fr.univartois.iutl.info.raytracing.light.Light;
 import fr.univartois.iutl.info.raytracing.figure.IFigure;
 
 public interface SceneBuilder {
@@ -18,16 +18,16 @@ public interface SceneBuilder {
     void setWidth(int width);
 
     /***
-     * Add a light to the scene
+     * Adds a light to the scene
      * @param light the light to add
      */
     void addLight(Light light);
 
     /***
-     * Add a figure to the scene
-     * @param figures the figure to add
+     * Adds a figure to the scene
+     * @param figure the figure to add
      */
-    void addFigures(IFigure figures);
+    void addFigure(IFigure figure);
 
     /***
      * Set the camera of the scene

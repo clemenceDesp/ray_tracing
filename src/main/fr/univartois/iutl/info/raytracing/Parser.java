@@ -1,5 +1,7 @@
-package fr.univartois.iutl.info.raytracing.parser;
+package fr.univartois.iutl.info.raytracing;
 
+import fr.univartois.iutl.info.raytracing.light.DirectionalLight;
+import fr.univartois.iutl.info.raytracing.light.PunctualLight;
 import fr.univartois.iutl.info.raytracing.numeric.*;
 import fr.univartois.iutl.info.raytracing.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.figure.Plane;
@@ -202,7 +204,7 @@ public class Parser {
         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
             particularities(triangle);
-            sceneBuilder.addFigures(triangle);
+            sceneBuilder.addFigure(triangle);
         }
     }
 
@@ -217,7 +219,7 @@ public class Parser {
                 Double.parseDouble(line[3])))),
                 Double.parseDouble(line[4]));
         particularities(sphere);
-        sceneBuilder.addFigures(sphere);
+        sceneBuilder.addFigure(sphere);
     }
 
     /**
@@ -249,7 +251,7 @@ public class Parser {
         }
 
         particularities(plane);
-        sceneBuilder.addFigures(plane);
+        sceneBuilder.addFigure(plane);
         if (checker) {
             checker = false;
         }
@@ -273,7 +275,7 @@ public class Parser {
     }
 
     /**
-     * Add particularities to figures.
+     * Adds particularities to a figure.
      * @param figure Figure which will be modified or not.
      */
     private static void particularities(IFigure figure) {

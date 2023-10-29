@@ -3,10 +3,10 @@ package fr.univartois.iutl.info.raytracing.raytracing;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class AntialiasingGrid extends AbstractRayTracing{
+public class AntiAliasingGrid extends AbstractRayTracing{
     private final BufferedImage image;
 
-    public AntialiasingGrid(IRayTracing rayTracing) {
+    public AntiAliasingGrid(IRayTracing rayTracing) {
         super(rayTracing);
         this.image = getScene().getImage();
         gridAntialiasingMethod();

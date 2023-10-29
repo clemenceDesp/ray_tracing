@@ -3,7 +3,7 @@ package fr.univartois.iutl.info.raytracing.scene;
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
 import fr.univartois.iutl.info.raytracing.numeric.Triplets;
-import fr.univartois.iutl.info.raytracing.parser.Light;
+import fr.univartois.iutl.info.raytracing.light.Light;
 import fr.univartois.iutl.info.raytracing.figure.IFigure;
 
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class ConcreteSceneBuilder implements SceneBuilder {
     private int width;
 
     /***
-     * The list of light of the scene
+     * The list of lights of the scene
      */
-    private final List<Light> light;
+    private final List<Light> lights;
 
     /***
      * The list of figures of the scene
@@ -60,7 +60,7 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      * Create a new scene builder
      */
     public ConcreteSceneBuilder() {
-        this.light = new ArrayList<>();
+        this.lights = new ArrayList<>();
         this.figures = new ArrayList<>();
         this.camera = null;
         this.height = 0;
@@ -95,16 +95,16 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     @Override
     public void addLight(Light light) {
-        this.light.add(light);
+        this.lights.add(light);
     }
 
     /***
      * Add a figure to the scene
-     * @param figures the figure to add
+     * @param figure the figure to add
      */
     @Override
-    public void addFigures(IFigure figures) {
-        this.figures.add(figures);
+    public void addFigure(IFigure figure) {
+        this.figures.add(figure);
     }
 
     /***
@@ -152,6 +152,6 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight, sampling, numberSampling);
+        return new Scene(height, width, lights.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight, sampling, numberSampling);
     }
 }

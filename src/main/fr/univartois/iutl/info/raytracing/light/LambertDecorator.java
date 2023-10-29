@@ -1,4 +1,4 @@
-package fr.univartois.iutl.info.raytracing.parser;
+package fr.univartois.iutl.info.raytracing.light;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
@@ -26,7 +26,7 @@ public class LambertDecorator implements Calculator{
 		Vector v = p.substraction(cc);
 		Vector n = v.normalization();
 		Color color = new Color(new Triplets(new Coordinates(0,0,0)));
-		for(Light light:scene.getLight()) {
+		for(Light light:scene.getLights()) {
 			Color c = light.getColors();
 			double max= 0;
 			Vector l;
@@ -44,7 +44,7 @@ public class LambertDecorator implements Calculator{
 			}
 			color = color.addition(c.multiplication(max));
 		}
-		return (color.multiplication(cDiffuse)).addition(scene.getAmbientLigth());
+		return (color.multiplication(cDiffuse)).addition(scene.getAmbientLight());
 		
 	}
 

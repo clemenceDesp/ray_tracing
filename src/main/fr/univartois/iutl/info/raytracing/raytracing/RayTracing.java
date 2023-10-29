@@ -2,9 +2,9 @@ package fr.univartois.iutl.info.raytracing.raytracing;
 
 import fr.univartois.iutl.info.raytracing.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.BaseColor;
-import fr.univartois.iutl.info.raytracing.parser.Calculator;
-import fr.univartois.iutl.info.raytracing.parser.LambertDecorator;
+import fr.univartois.iutl.info.raytracing.light.BaseColor;
+import fr.univartois.iutl.info.raytracing.light.Calculator;
+import fr.univartois.iutl.info.raytracing.light.LambertDecorator;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 import javax.imageio.ImageIO;
