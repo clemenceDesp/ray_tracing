@@ -9,7 +9,8 @@ public class Point {
 	private Triplets triplets;
 
 	/**
-	 * @param triplets
+	 * Constructor of Point
+	 * @param triplets the coordinates of the point
 	 */
 	public Point(Triplets triplets) {
 		this.triplets=triplets;
@@ -18,6 +19,7 @@ public class Point {
 	
 	
 	/**
+	 * getter of the coordinates of the point
 	 * @return the triplets
 	 */
 	public Triplets getTriplets() {
@@ -25,6 +27,7 @@ public class Point {
 	}
 
 	/**
+	 * setter of the coordinates of the point
 	 * @param triplets the triplets to set
 	 */
 	public void setTriplets(Triplets triplets) {
@@ -34,36 +37,36 @@ public class Point {
 
 
 	/**
-	 * @param pointB
-	 * @return Point
 	 * Does the addition between a point and a vector, this find a new point with those coordinates
+	 * @param pointB the vector to add
+	 * @return the result of the addition
 	 */
 	public Point addition(Vector pointB) {
 		return new Point (triplets.addition(pointB.getTriplets().getPointA()));
 	}
-	
+
 	/**
-	 * @param pointB
-	 * @return Vector
-	 * substracting two points finds the vector to go from point A to point B
+	 * Does the addition between two points, this find a new point with those coordinates
+	 * @param pointB the point to add
+	 * @return the result of the addition
 	 */
 	public Vector substraction(Point pointB) {
 		return new Vector (triplets.substraction(pointB.getTriplets().getPointA()));
 	}
-	
+
 	/**
-	 * @param pointB
-	 * @return Point
-	 * substracting a vector to a point finds a new point at those coordinates
+	 * Does the substraction between two points, this find a new vector with those coordinates
+	 * @param pointB the point to substract
+	 * @return the result of the substraction
 	 */
 	public Point substraction(Vector pointB) {
 		return new Point (triplets.substraction(pointB.getTriplets().getPointA()));
 	}
-	
+
 	/**
-	 * @param d
-	 * @return Point
-	 * multiplicate a point with an integer to find a new point
+	 * Does the substraction between two points, this find a new vector with those coordinates
+	 * @param d the double to multiply
+	 * @return the result of the multiplication
 	 */
 	public Point multiplication(double d) {
 		return new Point(triplets.multiplication(d));

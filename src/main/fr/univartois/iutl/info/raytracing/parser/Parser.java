@@ -17,6 +17,9 @@ import java.io.IOException;
  * The {@link Parser} class has the responsibility of reading a given text file.
  */
 public class Parser {
+    private Parser() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * A boolean put to false, switching to true if the next plane needs to be checked
@@ -61,7 +64,7 @@ public class Parser {
     /**
      * Scene builder instance
      */
-    private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
+    private static final ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
      * Changes the width and height of the scene.

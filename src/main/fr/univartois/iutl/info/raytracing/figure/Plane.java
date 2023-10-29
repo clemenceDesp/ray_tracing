@@ -11,11 +11,11 @@ public class Plane implements IFigure {
     /**
      * A point of the plane
      */
-    private Point point;
+    private final Point point;
     /**
      * A normal of a plane
      */
-    private Vector normal;
+    private final Vector normal;
     /**
      * The diffuse color of the figure
      */
@@ -31,7 +31,7 @@ public class Plane implements IFigure {
     /**
      * the boolean for if the Plane is checked or not
      */
-    private boolean checker;
+    private final boolean checker;
 
     /**
      * the length of a side of the squares of the checkerboard
@@ -75,38 +75,6 @@ public class Plane implements IFigure {
         this.c1 = c1;
         this.c2 = c2;
         this.length = length;
-    }
-
-    /**
-     * check if the plane is checked or not
-     * @return checker
-     */
-    public boolean isChecker() {
-        return checker;
-    }
-
-    /**
-     *
-     * @return length
-     */
-    public double getLength() {
-        return length;
-    }
-
-    /**
-     *
-     * @return color
-     */
-    public Color getC1() {
-        return c1;
-    }
-
-    /**
-     *
-     * @return color
-     */
-    public Color getC2() {
-        return c2;
     }
 
     /**
