@@ -306,8 +306,6 @@ public class Parser {
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 String[] line = strCurrentLine.split(" ");
                 switch (line[0]) {
-                    case "#":
-                        break;
                     case "size":
                         size(line);
                         break;
@@ -352,9 +350,12 @@ public class Parser {
                         break;
                     case "sampling":
                         sampling(line);
+                        break;
                     case "checker":
                         checker = true;
                         checker(line);
+                        break;
+                    default:
                         break;
                 }
             }
