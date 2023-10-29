@@ -1,9 +1,8 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.Light;
 
 
 /**
@@ -18,7 +17,7 @@ public interface IFigure {
      */
     Point getOrigin();
     
-    double findInteraction(Vector d);
+    double findInteraction(Point lookFrom, Vector d);
 
     /**
      * Gives the diffuse color of the figure.

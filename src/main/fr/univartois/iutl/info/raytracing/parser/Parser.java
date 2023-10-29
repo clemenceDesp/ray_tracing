@@ -1,21 +1,46 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.*;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
-import fr.univartois.iutl.info.raytracing.parser.figure.Plane;
-import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
-import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.Plane;
+import fr.univartois.iutl.info.raytracing.figure.Sphere;
+import fr.univartois.iutl.info.raytracing.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
-import fr.univartois.iutl.info.raytracing.parser.PunctualLight;
-import fr.univartois.iutl.info.raytracing.parser.DirectionalLight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/***
+ * The {@link Parser} class has the responsibility of reading a given text file.
+ */
 public class Parser {
+    private Parser() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    /**
+     * A boolean put to false, switching to true if the next plane needs to be checked
+     */
+    private static boolean checker = false;
+
+    /**
+     * The first color of the two which are used in the case of a checked plane
+     */
+    private static Color c1;
+
+    /**
+     * The second color of the two which are used in the case of a checked plane
+     */
+    private static Color c2;
+
+    /**
+     * The length of a checkerboard square
+     */
+    private static double length;
+
     /**
      * Array that stores the points created using maxverts and vertex.
      */
@@ -39,7 +64,7 @@ public class Parser {
     /**
      * Scene builder instance
      */
-    private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
+    private static final ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
      * Changes the width and height of the scene.
@@ -119,7 +144,7 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void directional(String[] line) {
-        Point directional = new Point(new Triplets(new Coordinates(
+        Vector directional = new Vector(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3]))));
@@ -127,7 +152,7 @@ public class Parser {
                 Double.parseDouble(line[4]),
                 Double.parseDouble(line[5]),
                 Double.parseDouble(line[6]))));
-        sceneBuilder.addLight(new DirectionalLight(directional, color));
+        sceneBuilder.addLight(new DirectionalLight(color, directional));
     }
 
     /**
@@ -176,7 +201,7 @@ public class Parser {
     private static void tri(String[] line) {
         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
-            particularities(line, triangle);
+            particularities(triangle);
             sceneBuilder.addFigures(triangle);
         }
     }
@@ -191,7 +216,7 @@ public class Parser {
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3])))),
                 Double.parseDouble(line[4]));
-        particularities(line, sphere);
+        particularities(sphere);
         sceneBuilder.addFigures(sphere);
     }
 
@@ -200,39 +225,81 @@ public class Parser {
      * @param line Line that is being read.
      */
     private static void plane(String[] line) {
-        Plane plane = new Plane(new Point(new Triplets(new Coordinates(
+        Plane plane;
+        if (!checker) {
+            plane = new Plane(new Point(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3])))),
+                    new Vector(new Triplets(new Coordinates(
+                            Double.parseDouble(line[4]),
+                            Double.parseDouble(line[5]),
+                            Double.parseDouble(line[6])))));
+        }
+        else {
+            plane = new Plane(new Point(new Triplets(new Coordinates(
+                    Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]),
+                    Double.parseDouble(line[3])))),
+                    new Vector(new Triplets(new Coordinates(
+                            Double.parseDouble(line[4]),
+                            Double.parseDouble(line[5]),
+                            Double.parseDouble(line[6])))),
+                    c1, c2,length);
+        }
+
+        particularities(plane);
+        sceneBuilder.addFigures(plane);
+        if (checker) {
+            checker = false;
+        }
+    }
+
+    /**
+     * it creates the two colors for the checked plane
+     * @param line Line that is being read.
+     */
+    private static void checker(String[] line) {
+        c1 = new Color(new Triplets(new Coordinates(
                 Double.parseDouble(line[1]),
                 Double.parseDouble(line[2]),
-                Double.parseDouble(line[3])))),
-                new Vector(new Triplets(new Coordinates(
-                        Double.parseDouble(line[4]),
-                        Double.parseDouble(line[5]),
-                        Double.parseDouble(line[6])))));
-        particularities(line, plane);
-        sceneBuilder.addFigures(plane);
+                Double.parseDouble(line[3]))));
+        c2 = new Color(new Triplets(new Coordinates(
+                Double.parseDouble(line[4]),
+                Double.parseDouble(line[5]),
+                Double.parseDouble(line[6]))));
+        length = Double.parseDouble(line[7]);
+        checker = true;
     }
 
     /**
      * Add particularities to figures.
-     * @param line Line that is being read.
      * @param figure Figure which will be modified or not.
      */
-    private static void particularities(String[] line, IFigure figure) {
+    private static void particularities(IFigure figure) {
         if (stockDiffuse != null) {
             figure.setDiffuse(new Color(new Triplets(new Coordinates(
-                    Double.parseDouble(line[1]),
-                    Double.parseDouble(line[2]),
-                    Double.parseDouble(line[3])))));
+                    Double.parseDouble(stockDiffuse[1]),
+                    Double.parseDouble(stockDiffuse[2]),
+                    Double.parseDouble(stockDiffuse[3])))));
         }
         if (stockSpecular != null) {
             figure.setSpecular(new Color(new Triplets(new Coordinates(
-                    Double.parseDouble(line[1]),
-                    Double.parseDouble(line[2]),
-                    Double.parseDouble(line[3])))));
+                    Double.parseDouble(stockSpecular[1]),
+                    Double.parseDouble(stockSpecular[2]),
+                    Double.parseDouble(stockSpecular[3])))));
         }
         if (stockShininess != null) {
-            figure.setShininess(Integer.parseInt(line[1]));
+            figure.setShininess(Integer.parseInt(stockShininess[1]));
         }
+    }
+
+    /**
+     * Changes the sampling of the scene
+     * @param line Line that is being read.
+     */
+    private static void sampling(String[] line) {
+        sceneBuilder.setSampling(line[1], Integer.parseInt(line[2]));
     }
 
     public static Scene read(String fileName) {
@@ -245,8 +312,6 @@ public class Parser {
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 String[] line = strCurrentLine.split(" ");
                 switch (line[0]) {
-                    case "#":
-                        break;
                     case "size":
                         size(line);
                         break;
@@ -288,6 +353,15 @@ public class Parser {
                         break;
                     case "plane":
                         plane(line);
+                        break;
+                    case "sampling":
+                        sampling(line);
+                        break;
+                    case "checker":
+                        checker = true;
+                        checker(line);
+                        break;
+                    default:
                         break;
                 }
             }

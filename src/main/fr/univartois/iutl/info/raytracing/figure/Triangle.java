@@ -1,9 +1,8 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Triangle} class represents a triangle.
@@ -87,8 +86,26 @@ public class Triangle implements IFigure {
         return pointA;
     }
     
-    public double findInteraction(Vector d) {
-    	throw new UnsupportedOperationException("This function only works with a sphere for now");
+    public double findInteraction(Point lookFrom, Vector d) {
+    	Vector numerator = (this.getPointB().substraction(this.pointA)).vectorProduct(this.getPointC().substraction(this.getPointA()));
+        Vector normal = numerator.normalization();
+        double y = d.scalarProduct(normal);
+        if (y==0) {
+            return -1;
+        }
+        double t = ((this.pointA.substraction(lookFrom)).scalarProduct(normal))/y;
+        Point p = lookFrom.addition(d.multiplication(t));
+        if (((this.getPointB().substraction(this.getPointA())).vectorProduct(p.substraction(this.getPointA()))).scalarProduct(normal) < 0) {
+            return -1;
+        }
+        if (((this.getPointC().substraction(this.getPointB())).vectorProduct(p.substraction(this.getPointB()))).scalarProduct(normal) < 0) {
+            return -1;
+        }
+        if (((this.getPointA().substraction(this.getPointC())).vectorProduct(p.substraction(this.getPointC()))).scalarProduct(normal) < 0) {
+            return -1;
+        }
+        return t;
+
     }
 
     /**

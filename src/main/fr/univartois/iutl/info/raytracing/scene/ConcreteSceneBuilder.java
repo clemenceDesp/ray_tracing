@@ -4,7 +4,7 @@ import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
 import fr.univartois.iutl.info.raytracing.numeric.Triplets;
 import fr.univartois.iutl.info.raytracing.parser.Light;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,15 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     private Color ambientLight;
 
+    /***
+     * The sampling of the scene
+     */
+    private String sampling;
+
+    /***
+     * The number of samples or the size of one side of the grid.
+     */
+    private int numberSampling;
 
     /***
      * Create a new scene builder
@@ -58,6 +67,8 @@ public class ConcreteSceneBuilder implements SceneBuilder {
         this.width = 0;
         this.output = "output.png";
         this.ambientLight = new Color(new Triplets(new Coordinates(0, 0, 0)));
+        this.sampling = "middle";
+        this.numberSampling = 1;
     }
 
     /***
@@ -123,12 +134,24 @@ public class ConcreteSceneBuilder implements SceneBuilder {
         this.ambientLight = ambientLight;
     }
 
+    /**
+     * Changes the sampling.
+     *
+     * @param sampling The new sampling.
+     * @param numberSampling The number of samples or the size of one side of the grid.
+     */
+    @Override
+    public void setSampling(String sampling, int numberSampling) {
+        this.sampling = sampling;
+        this.numberSampling = numberSampling;
+    }
+
     /***
      * Build the scene
      * @return the scene
      */
     @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight);
+        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight, sampling, numberSampling);
     }
 }

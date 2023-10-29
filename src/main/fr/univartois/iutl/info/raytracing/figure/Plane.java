@@ -1,9 +1,8 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Plane} class represents a plane.
@@ -12,11 +11,11 @@ public class Plane implements IFigure {
     /**
      * A point of the plane
      */
-    private Point point;
+    private final Point point;
     /**
      * A normal of a plane
      */
-    private Vector normal;
+    private final Vector normal;
     /**
      * The diffuse color of the figure
      */
@@ -28,7 +27,25 @@ public class Plane implements IFigure {
     /**
      * The shininess
      */
-    int shininess;
+    private int shininess;
+    /**
+     * the boolean for if the Plane is checked or not
+     */
+    private final boolean checker;
+
+    /**
+     * the length of a side of the squares of the checkerboard
+     */
+    private double length;
+
+    /**
+     * the first color for the checkerboard
+     */
+    private Color c1;
+    /**
+     * the second color for the checkerboard
+     */
+    private Color c2;
 
     /**
      * Constructor of plane.
@@ -40,7 +57,24 @@ public class Plane implements IFigure {
         this.normal = normal;
         this.diffuse = null;
         this.specular = null;
+        this.shininess = -1;this.checker = false;
+    }
+
+    /**
+     * Constructor of plane.
+     * @param point A point of the plane.
+     * @param normal A normal of a plane.
+     */
+    public Plane(Point point, Vector normal, Color c1, Color c2, double length) {
+        this.point = point;
+        this.normal = normal;
+        this.diffuse = null;
+        this.specular = null;
         this.shininess = -1;
+        this.checker = true;
+        this.c1 = c1;
+        this.c2 = c2;
+        this.length = length;
     }
 
     /**
@@ -62,8 +96,12 @@ public class Plane implements IFigure {
         return normal;
     }
     
-    public double findInteraction(Vector d) {
-    	throw new UnsupportedOperationException("This function only works with a sphere for now");
+    public double findInteraction(Point lookFrom, Vector d) {
+    	double y = d.scalarProduct(this.getNormal());
+        if (y==0) {
+            return -1;
+        }
+        return ((this.getOrigin().substraction(lookFrom)).scalarProduct(this.getNormal()))/y;
     }
 
 
