@@ -44,15 +44,6 @@ public class Sphere implements IFigure {
     }
 
     /**
-     * Gives the center of this sphere.
-     *
-     * @return The center of this sphere.
-     */
-    public Point getCenter() {
-        return center;
-    }
-
-    /**
      * Gives the radius of this sphere.
      *
      * @return The radius of this sphere.
@@ -72,8 +63,8 @@ public class Sphere implements IFigure {
     }
     
     public double findInteraction(Point lookFrom, Vector d) {
-        double b = lookFrom.substraction(getCenter()).multiplication(2).scalarProduct(d);
-        double c = lookFrom.substraction(getCenter()).scalarProduct(lookFrom.substraction(getCenter())) - getRadius() * getRadius();
+        double b = lookFrom.substraction(getOrigin()).multiplication(2).scalarProduct(d);
+        double c = lookFrom.substraction(getOrigin()).scalarProduct(lookFrom.substraction(getOrigin())) - getRadius() * getRadius();
         double delta = b * b - 4 * 1 * c;
         if (delta < 0) {
             return -1;
