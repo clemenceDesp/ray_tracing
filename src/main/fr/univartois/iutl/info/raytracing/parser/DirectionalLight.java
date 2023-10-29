@@ -69,8 +69,8 @@ public class DirectionalLight implements Light{
 	}
 
 	/**
-	 * @param point
-	 * set the point
+	 * set the vector
+	 * @param vector The new vector.
 	 */
 	public void setVector(Vector vector) {
 		this.vector = vector;
