@@ -3,8 +3,15 @@ package fr.univartois.iutl.info.raytracing.scene;
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
 import fr.univartois.iutl.info.raytracing.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingGrid;
+import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingRandom;
+import fr.univartois.iutl.info.raytracing.raytracing.IRayTracing;
+import fr.univartois.iutl.info.raytracing.raytracing.RayTracing;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Scene {
 
@@ -36,7 +43,7 @@ public class Scene {
     /***
      * The image of the scene
      */
-    private final BufferedImage image;
+    private BufferedImage image;
 
     /***
      * The output of the scene
@@ -48,6 +55,10 @@ public class Scene {
      */
     private final Color ambientLigth;
 
+    private String sampling;
+
+    private int numberSampling;
+
     /***
      * Create a new scene
      * @param height the height of the scene
@@ -58,7 +69,7 @@ public class Scene {
      * @param output the output of the scene
      * @param ambientLigth the ambient light of the scene
      */
-    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera, String output, Color ambientLigth) {
+    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera, String output, Color ambientLigth, String sampling, int numberSampling) {
         this.height = height;
         this.width = width;
         this.light = light;
@@ -66,6 +77,8 @@ public class Scene {
         this.camera = camera;
         this.output = output;
         this.ambientLigth = ambientLigth;
+        this.sampling = sampling;
+        this.numberSampling = numberSampling;
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -123,6 +136,14 @@ public class Scene {
     }
 
     /***
+     * Set the image of this scene
+     * @param image the image of this scene
+     */
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    /***
      * Gives the output of this scene
      * @return the output of this scene
      */
@@ -136,5 +157,32 @@ public class Scene {
      */
     public Color getAmbientLigth() {
         return ambientLigth;
+    }
+    public void saveImage() {
+        IRayTracing rayTracing = new RayTracing(this);
+        if (sampling.equals("grid"))
+            new AntialiasingGrid(rayTracing);
+        else if (sampling.equals("random"))
+            new AntialiasingRandom(rayTracing);
+        save();
+    }
+
+    private void save() {
+        try {
+            File outputfile = new File(output);
+            ImageIO.write(image, "png", outputfile);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getSampling() {
+        return sampling;
+    }
+
+    public int getNumberSampling() {
+        return numberSampling;
     }
 }
