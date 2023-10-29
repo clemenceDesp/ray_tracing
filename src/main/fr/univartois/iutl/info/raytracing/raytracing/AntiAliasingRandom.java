@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class AntialiasingRandom extends AbstractRayTracing{
+public class AntiAliasingRandom extends AbstractRayTracing{
     private final BufferedImage image;
     private static final Random rand = new Random();
 
-    public AntialiasingRandom(IRayTracing rayTracing) {
+    public AntiAliasingRandom(IRayTracing rayTracing) {
         super(rayTracing);
         this.image = getScene().getImage();
         randomAntialiasingMethod();

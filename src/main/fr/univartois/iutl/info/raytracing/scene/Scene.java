@@ -1,10 +1,10 @@
 package fr.univartois.iutl.info.raytracing.scene;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
-import fr.univartois.iutl.info.raytracing.parser.Light;
+import fr.univartois.iutl.info.raytracing.light.Light;
 import fr.univartois.iutl.info.raytracing.figure.IFigure;
-import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingGrid;
-import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingRandom;
+import fr.univartois.iutl.info.raytracing.raytracing.AntiAliasingGrid;
+import fr.univartois.iutl.info.raytracing.raytracing.AntiAliasingRandom;
 import fr.univartois.iutl.info.raytracing.raytracing.IRayTracing;
 import fr.univartois.iutl.info.raytracing.raytracing.RayTracing;
 
@@ -26,9 +26,9 @@ public class Scene {
     private final int width;
 
     /***
-     * The list of light of the scene
+     * The list of lights of the scene
      */
-    private final Light[] light;
+    private final Light[] lights;
 
     /***
      * The list of figures of the scene
@@ -53,7 +53,7 @@ public class Scene {
     /***
      * The ambient light of the scene
      */
-    private final Color ambientLigth;
+    private final Color ambientLight;
 
     private String sampling;
 
@@ -63,20 +63,20 @@ public class Scene {
      * Create a new scene
      * @param height the height of the scene
      * @param width the width of the scene
-     * @param light the list of light of the scene
+     * @param lights the list of lights of the scene
      * @param figures the list of figures of the scene
      * @param camera the camera of the scene
      * @param output the output of the scene
-     * @param ambientLigth the ambient light of the scene
+     * @param ambientLight the ambient light of the scene
      */
-    public Scene(int height, int width, Light[] light, IFigure[] figures, Camera camera, String output, Color ambientLigth, String sampling, int numberSampling) {
+    public Scene(int height, int width, Light[] lights, IFigure[] figures, Camera camera, String output, Color ambientLight, String sampling, int numberSampling) {
         this.height = height;
         this.width = width;
-        this.light = light;
+        this.lights = lights;
         this.figures = figures;
         this.camera = camera;
         this.output = output;
-        this.ambientLigth = ambientLigth;
+        this.ambientLight = ambientLight;
         this.sampling = sampling;
         this.numberSampling = numberSampling;
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -101,12 +101,12 @@ public class Scene {
     }
 
     /**
-     * Gives the list of all light in this scene.
+     * Gives the list of all lights in this scene.
      *
-     * @return array of all light in this scene.
+     * @return array of all lights in this scene.
      */
-    public Light[] getLight() {
-        return light;
+    public Light[] getLights() {
+        return lights;
     }
 
     /**
@@ -155,15 +155,15 @@ public class Scene {
      * Gives the ambient light of this scene
      * @return the ambient light of this scene
      */
-    public Color getAmbientLigth() {
-        return ambientLigth;
+    public Color getAmbientLight() {
+        return ambientLight;
     }
     public void saveImage() {
         IRayTracing rayTracing = new RayTracing(this);
         if (sampling.equals("grid"))
-            new AntialiasingGrid(rayTracing);
+            new AntiAliasingGrid(rayTracing);
         else if (sampling.equals("random"))
-            new AntialiasingRandom(rayTracing);
+            new AntiAliasingRandom(rayTracing);
         save();
     }
 
