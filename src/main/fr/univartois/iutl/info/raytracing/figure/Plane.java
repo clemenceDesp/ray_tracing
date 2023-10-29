@@ -11,11 +11,11 @@ public class Plane implements IFigure {
     /**
      * A point of the plane
      */
-    private Point point;
+    private final Point point;
     /**
      * A normal of a plane
      */
-    private Vector normal;
+    private final Vector normal;
     /**
      * The diffuse color of the figure
      */
@@ -31,7 +31,7 @@ public class Plane implements IFigure {
     /**
      * the boolean for if the Plane is checked or not
      */
-    private boolean checker;
+    private final boolean checker;
 
     /**
      * the length of a side of the squares of the checkerboard
