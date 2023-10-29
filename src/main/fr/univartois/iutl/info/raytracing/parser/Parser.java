@@ -1,10 +1,10 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.*;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
-import fr.univartois.iutl.info.raytracing.parser.figure.Plane;
-import fr.univartois.iutl.info.raytracing.parser.figure.Sphere;
-import fr.univartois.iutl.info.raytracing.parser.figure.Triangle;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.Plane;
+import fr.univartois.iutl.info.raytracing.figure.Sphere;
+import fr.univartois.iutl.info.raytracing.figure.Triangle;
 import fr.univartois.iutl.info.raytracing.scene.Camera;
 import fr.univartois.iutl.info.raytracing.scene.ConcreteSceneBuilder;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
@@ -13,10 +13,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/***
+ * The {@link Parser} class has the responsibility of reading a given text file.
+ */
 public class Parser {
 
     /**
-     * a boolean put to false, switching to true if the next plane needs to be checked
+     * A boolean put to false, switching to true if the next plane needs to be checked
      */
     private static boolean checker = false;
 
@@ -31,7 +34,7 @@ public class Parser {
     private static Color c2;
 
     /**
-     * the length of a checkerboard square
+     * The length of a checkerboard square
      */
     private static double length;
 
@@ -195,7 +198,7 @@ public class Parser {
     private static void tri(String[] line) {
         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
-            particularities(line, triangle);
+            particularities(triangle);
             sceneBuilder.addFigures(triangle);
         }
     }
@@ -210,7 +213,7 @@ public class Parser {
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3])))),
                 Double.parseDouble(line[4]));
-        particularities(line, sphere);
+        particularities(sphere);
         sceneBuilder.addFigures(sphere);
     }
 
@@ -220,7 +223,6 @@ public class Parser {
      */
     private static void plane(String[] line) {
         Plane plane;
-        System.out.println(checker);
         if (!checker) {
             plane = new Plane(new Point(new Triplets(new Coordinates(
                     Double.parseDouble(line[1]),
@@ -243,7 +245,7 @@ public class Parser {
                     c1, c2,length);
         }
 
-        particularities(line, plane);
+        particularities(plane);
         sceneBuilder.addFigures(plane);
         if (checker) {
             checker = false;
@@ -252,7 +254,7 @@ public class Parser {
 
     /**
      * it creates the two colors for the checked plane
-     * @param line
+     * @param line Line that is being read.
      */
     private static void checker(String[] line) {
         c1 = new Color(new Triplets(new Coordinates(
@@ -269,10 +271,9 @@ public class Parser {
 
     /**
      * Add particularities to figures.
-     * @param line Line that is being read.
      * @param figure Figure which will be modified or not.
      */
-    private static void particularities(String[] line, IFigure figure) {
+    private static void particularities(IFigure figure) {
         if (stockDiffuse != null) {
             figure.setDiffuse(new Color(new Triplets(new Coordinates(
                     Double.parseDouble(stockDiffuse[1]),
@@ -308,8 +309,6 @@ public class Parser {
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 String[] line = strCurrentLine.split(" ");
                 switch (line[0]) {
-                    case "#":
-                        break;
                     case "size":
                         size(line);
                         break;
@@ -354,9 +353,12 @@ public class Parser {
                         break;
                     case "sampling":
                         sampling(line);
+                        break;
                     case "checker":
                         checker = true;
                         checker(line);
+                        break;
+                    default:
                         break;
                 }
             }

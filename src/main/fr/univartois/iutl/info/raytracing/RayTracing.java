@@ -8,7 +8,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import fr.univartois.iutl.info.raytracing.checkerboard.CalculateChecked;
-import fr.univartois.iutl.info.raytracing.checkerboard.CalculateFull;
 import fr.univartois.iutl.info.raytracing.checkerboard.ICalculateMethod;
 import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
@@ -17,8 +16,8 @@ import fr.univartois.iutl.info.raytracing.numeric.Vector;
 import fr.univartois.iutl.info.raytracing.parser.BaseColor;
 import fr.univartois.iutl.info.raytracing.parser.Calculator;
 import fr.univartois.iutl.info.raytracing.parser.LambertDecorator;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
-import fr.univartois.iutl.info.raytracing.parser.figure.Plane;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.Plane;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 
@@ -64,9 +63,9 @@ public class RayTracing{
                 double t = getMinT(d);
 
                 if (t >= 0) {
-                    if (stockFigure instanceof fr.univartois.iutl.info.raytracing.parser.figure.Plane && ((Plane) stockFigure).isChecker()) {
+                    if (stockFigure instanceof Plane && ((Plane) stockFigure).isChecker()) {
                                 ICalculateMethod calculateMethod = new CalculateChecked();
-                                fr.univartois.iutl.info.raytracing.numeric.Color color1 = calculateMethod.calculate(new Point(new Triplets(new Coordinates(i, 0, j))), ((Plane) stockFigure).getlength(), scene, t, d, stockFigure, ((Plane) stockFigure).getC1(), ((Plane) stockFigure).getC2());
+                                fr.univartois.iutl.info.raytracing.numeric.Color color1 = calculateMethod.calculate(new Point(new Triplets(new Coordinates(i, 0, j))), ((Plane) stockFigure).getLength(), scene, t, d, stockFigure, ((Plane) stockFigure).getC1(), ((Plane) stockFigure).getC2());
                                 Color color = new Color((float) color1.getTriplets().getPointA().getX(), (float) color1.getTriplets().getPointA().getY(), (float) color1.getTriplets().getPointA().getZ());
                                 scene.getImage().setRGB(j, i, color.getRGB());
                     }

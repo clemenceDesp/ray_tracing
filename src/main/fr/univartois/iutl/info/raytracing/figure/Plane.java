@@ -1,9 +1,8 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Plane} class represents a plane.
@@ -90,7 +89,7 @@ public class Plane implements IFigure {
      *
      * @return length
      */
-    public double getlength() {
+    public double getLength() {
         return length;
     }
 
