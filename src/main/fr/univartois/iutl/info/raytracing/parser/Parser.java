@@ -220,7 +220,6 @@ public class Parser {
      */
     private static void plane(String[] line) {
         Plane plane;
-        System.out.println(checker);
         if (!checker) {
             plane = new Plane(new Point(new Triplets(new Coordinates(
                     Double.parseDouble(line[1]),
