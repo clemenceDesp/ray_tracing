@@ -195,7 +195,7 @@ public class Parser {
     private static void tri(String[] line) {
         if (Integer.parseInt(line[1]) < nbVerts && Integer.parseInt(line[2]) < nbVerts && Integer.parseInt(line[3]) < nbVerts) {
             Triangle triangle = new Triangle(verts[Integer.parseInt(line[1])], verts[Integer.parseInt(line[2])], verts[Integer.parseInt(line[3])]);
-            particularities(line, triangle);
+            particularities(triangle);
             sceneBuilder.addFigures(triangle);
         }
     }
@@ -210,7 +210,7 @@ public class Parser {
                 Double.parseDouble(line[2]),
                 Double.parseDouble(line[3])))),
                 Double.parseDouble(line[4]));
-        particularities(line, sphere);
+        particularities(sphere);
         sceneBuilder.addFigures(sphere);
     }
 
@@ -243,7 +243,7 @@ public class Parser {
                     c1, c2,length);
         }
 
-        particularities(line, plane);
+        particularities(plane);
         sceneBuilder.addFigures(plane);
         if (checker) {
             checker = false;
@@ -269,10 +269,9 @@ public class Parser {
 
     /**
      * Add particularities to figures.
-     * @param line Line that is being read.
      * @param figure Figure which will be modified or not.
      */
-    private static void particularities(String[] line, IFigure figure) {
+    private static void particularities(IFigure figure) {
         if (stockDiffuse != null) {
             figure.setDiffuse(new Color(new Triplets(new Coordinates(
                     Double.parseDouble(stockDiffuse[1]),
