@@ -1,22 +1,22 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
- * The {@link Plane} class represents a plane.
+ * The {@link Sphere} class represents a sphere.
  */
-public class Plane implements IFigure {
+public class Sphere implements IFigure {
     /**
-     * A point of the plane
+     * The center of the sphere
      */
-    private Point point;
+    protected Point center;
     /**
-     * A normal of a plane
+     * The radius of the sphere
      */
-    private Vector normal;
+    protected double radius;
+
     /**
      * The diffuse color of the figure
      */
@@ -30,17 +30,26 @@ public class Plane implements IFigure {
      */
     int shininess;
 
-    /**
-     * Constructor of plane.
-     * @param point A point of the plane.
-     * @param normal A normal of a plane.
+	/**
+     * Constructor of sphere.
+     * @param center The center of the sphere.
+     * @param radius The radius of the sphere.
      */
-    public Plane(Point point, Vector normal) {
-        this.point = point;
-        this.normal = normal;
+    public Sphere(Point center, double radius) {
+        this.center = center;
+        this.radius = radius;
         this.diffuse = null;
         this.specular = null;
         this.shininess = -1;
+    }
+
+    /**
+     * Gives the radius of this sphere.
+     *
+     * @return The radius of this sphere.
+     */
+    public double getRadius() {
+        return radius;
     }
 
     /**
@@ -50,26 +59,39 @@ public class Plane implements IFigure {
      */
     @Override
     public Point getOrigin() {
-        return point;
-    }
-
-    /**
-     * Gives the normal of this figure.
-     *
-     * @return The normal of this figure.
-     */
-    public Vector getNormal() {
-        return normal;
+        return center;
     }
     
     public double findInteraction(Point lookFrom, Vector d) {
-    	double y = d.scalarProduct(this.getNormal());
-        if (y==0) {
+        double b = lookFrom.substraction(getOrigin()).multiplication(2).scalarProduct(d);
+        double c = lookFrom.substraction(getOrigin()).scalarProduct(lookFrom.substraction(getOrigin())) - getRadius() * getRadius();
+        double delta = b * b - 4 * 1 * c;
+        if (delta < 0) {
+            return -1;
+        } else if (delta == 0) {
+            if ((-b) / 2 > 0) {
+                return (-b) / 2;
+            }
+            return -1;
+        } else {
+            double t1 = (-b + Math.sqrt(delta)) / 2;
+            double t2 = (-b - Math.sqrt(delta)) / 2;
+            if (t1 > t2) {
+                if (t2 > 0) {
+                    return t2;
+                } else if (t1 > 0) {
+                    return t1;
+                } else {
+                    return -1;
+                }
+            } else if (t1 > 0) {
+                return t1;
+            } else if (t2 > 0) {
+                return t2;
+            }
             return -1;
         }
-        return ((this.getOrigin().substraction(lookFrom)).scalarProduct(this.getNormal()))/y;
     }
-
 
     /**
      * Gives the diffuse color of the figure.

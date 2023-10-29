@@ -4,7 +4,7 @@ import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
 import fr.univartois.iutl.info.raytracing.numeric.Triplets;
 import fr.univartois.iutl.info.raytracing.parser.Light;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,6 +152,6 @@ public class ConcreteSceneBuilder implements SceneBuilder {
      */
     @Override
     public Scene build() {
-        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight);
+        return new Scene(height, width, light.toArray(new Light[0]), figures.toArray(new IFigure[0]), camera, output, ambientLight, sampling, numberSampling);
     }
 }

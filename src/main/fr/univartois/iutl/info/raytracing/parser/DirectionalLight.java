@@ -1,7 +1,6 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
-import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 
 /**
@@ -69,8 +68,8 @@ public class DirectionalLight implements Light{
 	}
 
 	/**
-	 * @param point
-	 * set the point
+	 * set the vector
+	 * @param vector The new vector.
 	 */
 	public void setVector(Vector vector) {
 		this.vector = vector;

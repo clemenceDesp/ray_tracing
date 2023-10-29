@@ -5,7 +5,7 @@ import fr.univartois.iutl.info.raytracing.numeric.Coordinates;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Triplets;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 /**

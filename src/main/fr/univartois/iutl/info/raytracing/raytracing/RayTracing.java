@@ -1,21 +1,20 @@
-package fr.univartois.iutl.info.raytracing;
+package fr.univartois.iutl.info.raytracing.raytracing;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 import fr.univartois.iutl.info.raytracing.parser.BaseColor;
 import fr.univartois.iutl.info.raytracing.parser.Calculator;
 import fr.univartois.iutl.info.raytracing.parser.LambertDecorator;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class RayTracing{
+
+public class RayTracing implements IRayTracing{
     private final Scene scene;
     private final double realheight;
     private final double realwidth;
@@ -73,16 +72,21 @@ public class RayTracing{
                 }
             }
         }
-		try {
-			// Retrieve image
-			BufferedImage image = scene.getImage();
-			File outputfile = new File(scene.getOutput());
-			ImageIO.write(image, "png", outputfile);
-		}
-			
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+        try {
+            // Retrieve image
+            BufferedImage image = scene.getImage();
+            File outputfile = new File(scene.getOutput());
+            ImageIO.write(image, "png", outputfile);
+        }
+
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Scene getScene() {
+        return scene;
     }
 
     private double getMinT(Vector d) {
