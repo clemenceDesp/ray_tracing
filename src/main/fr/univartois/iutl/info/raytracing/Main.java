@@ -1,6 +1,5 @@
 package fr.univartois.iutl.info.raytracing;
 
-import fr.univartois.iutl.info.raytracing.parser.Parser;
 import fr.univartois.iutl.info.raytracing.scene.Scene;
 
 import java.util.logging.Logger;
