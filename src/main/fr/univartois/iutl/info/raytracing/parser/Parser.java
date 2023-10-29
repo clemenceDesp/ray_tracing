@@ -13,6 +13,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/***
+ * The {@link Parser} class has the responsibility of reading a given text file.
+ */
 public class Parser {
 
     /**
