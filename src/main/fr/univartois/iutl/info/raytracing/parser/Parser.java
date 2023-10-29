@@ -64,7 +64,7 @@ public class Parser {
     /**
      * Scene builder instance
      */
-    private static ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
+    private static final ConcreteSceneBuilder sceneBuilder = new ConcreteSceneBuilder();
 
     /**
      * Changes the width and height of the scene.
