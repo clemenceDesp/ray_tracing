@@ -1,9 +1,8 @@
-package fr.univartois.iutl.info.raytracing.parser.figure;
+package fr.univartois.iutl.info.raytracing.figure;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
-import fr.univartois.iutl.info.raytracing.parser.Light;
 
 /**
  * The {@link Plane} class represents a plane.
@@ -28,7 +27,25 @@ public class Plane implements IFigure {
     /**
      * The shininess
      */
-    int shininess;
+    private int shininess;
+    /**
+     * the boolean for if the Plane is checked or not
+     */
+    private boolean checker;
+
+    /**
+     * the length of a side of the squares of the checkerboard
+     */
+    private double length;
+
+    /**
+     * the first color for the checkerboard
+     */
+    private Color c1;
+    /**
+     * the second color for the checkerboard
+     */
+    private Color c2;
 
     /**
      * Constructor of plane.
@@ -40,7 +57,56 @@ public class Plane implements IFigure {
         this.normal = normal;
         this.diffuse = null;
         this.specular = null;
+        this.shininess = -1;this.checker = false;
+    }
+
+    /**
+     * Constructor of plane.
+     * @param point A point of the plane.
+     * @param normal A normal of a plane.
+     */
+    public Plane(Point point, Vector normal, Color c1, Color c2, double length) {
+        this.point = point;
+        this.normal = normal;
+        this.diffuse = null;
+        this.specular = null;
         this.shininess = -1;
+        this.checker = true;
+        this.c1 = c1;
+        this.c2 = c2;
+        this.length = length;
+    }
+
+    /**
+     * check if the plane is checked or not
+     * @return checker
+     */
+    public boolean isChecker() {
+        return checker;
+    }
+
+    /**
+     *
+     * @return length
+     */
+    public double getLength() {
+        return length;
+    }
+
+    /**
+     *
+     * @return color
+     */
+    public Color getC1() {
+        return c1;
+    }
+
+    /**
+     *
+     * @return color
+     */
+    public Color getC2() {
+        return c2;
     }
 
     /**

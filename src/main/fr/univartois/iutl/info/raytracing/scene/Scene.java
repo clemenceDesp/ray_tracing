@@ -2,7 +2,7 @@ package fr.univartois.iutl.info.raytracing.scene;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
 import fr.univartois.iutl.info.raytracing.parser.Light;
-import fr.univartois.iutl.info.raytracing.parser.figure.IFigure;
+import fr.univartois.iutl.info.raytracing.figure.IFigure;
 import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingGrid;
 import fr.univartois.iutl.info.raytracing.raytracing.AntialiasingRandom;
 import fr.univartois.iutl.info.raytracing.raytracing.IRayTracing;
