@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Parser {
 
     /**
-     * a boolean put to false, switching to true if the next plane needs to be checked
+     * A boolean put to false, switching to true if the next plane needs to be checked
      */
     private static boolean checker = false;
 
@@ -31,7 +31,7 @@ public class Parser {
     private static Color c2;
 
     /**
-     * the length of a checkerboard square
+     * The length of a checkerboard square
      */
     private static double length;
 
@@ -252,7 +252,7 @@ public class Parser {
 
     /**
      * it creates the two colors for the checked plane
-     * @param line
+     * @param line Line that is being read.
      */
     private static void checker(String[] line) {
         c1 = new Color(new Triplets(new Coordinates(
