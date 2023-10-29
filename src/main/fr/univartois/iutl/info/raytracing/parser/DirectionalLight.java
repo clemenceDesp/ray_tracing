@@ -1,7 +1,6 @@
 package fr.univartois.iutl.info.raytracing.parser;
 
 import fr.univartois.iutl.info.raytracing.numeric.Color;
-import fr.univartois.iutl.info.raytracing.numeric.Point;
 import fr.univartois.iutl.info.raytracing.numeric.Vector;
 
 /**
